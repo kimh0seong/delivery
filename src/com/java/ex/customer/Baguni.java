@@ -87,6 +87,23 @@ public class Baguni extends JFrame {
 			
 			JButton btnPlus = new JButton("+");
 			btnPlus.setBounds(posX + 600, posY + (i * 60), 50, 50);
+			int menu_count = (int) hashmap.get("menu_count");
+			
+			btnPlus.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					int Plus = JOptionPane.showConfirmDialog(null, "수량을 늘리시겠습니까?",
+							"수량 추가", JOptionPane.YES_NO_OPTION);
+					hashmap.put("menu_count", (int)hashmap.get("menu_count")+1);
+					System.out.println(sbno);
+					System.out.println(menu_count);
+					if(Plus == JOptionPane.YES_OPTION) {
+						dao.BaguniUpdate(member.getId(), (int)hashmap.get("menu_count"), sbno);
+						lblBaguni.setText("가게명 : " + hashmap.get("businessname")+ " " + "메뉴 : " + hashmap.get("menuname") + " " + "가격 : " + hashmap.get("menuprice") + "원"+ "  "+  "수량 : " + (int)hashmap.get("menu_count"));					
+					}
+				}
+			});
+			
 			JButton btnMinus = new JButton("-");
 			btnMinus.setBounds(posX + 650, posY + (i * 60), 50, 50);
 			
