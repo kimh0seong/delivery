@@ -104,7 +104,7 @@ public class MenuDAO {
 	}
 	
 	public void insertBaguni(BaguniDTO dto) {
-		query = "insert into baguni(menu_no, m_id) value(?,?)";
+		query = "insert into baguni(menu_no, m_id, menu_count) value(?,?,1)";
 		PreparedStatement pstmt = null;
 		
 		try {
@@ -130,7 +130,7 @@ public class MenuDAO {
 	}
 
 	public  ArrayList<Map<String,Object>> selectBaguni(String id) {
-		query = "select sb_no, b_name, menuname, menuprice from baguni b, business bu, menu m where b.menu_no = m.menu_no AND bu.b_id = m.b_id AND  b.m_id = '" +id + "'";
+		query = "select sb_no, b_name, menuname, menuprice, menu_count from baguni b, business bu, menu m where b.menu_no = m.menu_no AND bu.b_id = m.b_id AND  b.m_id = '" +id + "'";
 		ArrayList<Map<String,Object>> BaguniList = new ArrayList<Map<String,Object>>();
 		
 		try {
@@ -144,12 +144,14 @@ public class MenuDAO {
 				String menuname = rs.getString("menuname");
 				int menuprice = rs.getInt("menuprice");
 				int sb_no = rs.getInt("sb_no");
+				int menu_count = rs.getInt("menu_count");
 								
 				Map map = new HashMap<String, Object>();
 				map.put("businessname",b_name);
 				map.put("menuname",menuname);
 				map.put("menuprice",menuprice);
 				map.put("sb_no", sb_no);
+				map.put("menu_count", menu_count);
 				BaguniList.add(map);
 			}
 		} catch(SQLException ex) {
