@@ -182,5 +182,28 @@ public class MenuDAO extends DBConnection {
 		}
 	}
 	
+	public void BaguniUpdate(String m_id, int menu_count ,int sb_no) {
+		query = "update baguni set menu_count = ? where m_id =? and sb_no =?";
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, menu_count);
+			pstmt.setString(2, m_id);
+			pstmt.setInt(3, sb_no);
+			pstmt.executeUpdate();
+			System.out.println("추가 성공");
+		} catch(SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) rs.close();
+				if (stmt != null) stmt.close();
+				if (con != null) con.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 }
 	
