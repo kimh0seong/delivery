@@ -9,6 +9,7 @@ public class OrderDTO {
 	private int menu_no;
 	private Date o_datetime;
 	private String o_state;
+	private int menu_count;
 	
 	public OrderDTO() {
 		o_no = 0;
@@ -17,15 +18,17 @@ public class OrderDTO {
 		menu_no=0;
 		o_datetime=null;
 		o_state="";
+		menu_count=0;
 	}
 	
-	public OrderDTO(int o_no, String b_id, String m_id, int menu_no, Date o_datetime, String o_state) {
+	public OrderDTO(int o_no, String b_id, String m_id, int menu_no, Date o_datetime, String o_state,int menu_count) {
 		this.o_no=o_no;
 		this.b_id=b_id;
 		this.m_id=m_id;
 		this.menu_no=menu_no;
 		this.o_datetime=o_datetime;
 		this.o_state=o_state;
+		this.menu_count=menu_count;
 	}
 
 	public int getO_no() {
@@ -74,6 +77,14 @@ public class OrderDTO {
 
 	public void setO_state(String o_state) {
 		this.o_state = o_state;
+	}
+
+	public int getMenu_count() {
+		return menu_count;
+	}
+
+	public void setMenu_count(int menu_count) {
+		this.menu_count = menu_count;
 	}
 
 	

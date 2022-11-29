@@ -76,7 +76,7 @@ public class Baguni extends JFrame {
 		
 		for(int i=0; i<BaguniList.size(); i++) {
 			HashMap<String, Object> hashmap = (HashMap<String, Object>) BaguniList.get(i);
-			JLabel lblBaguni = new JLabel("가게명 : " + hashmap.get("businessname")+ " " + "메뉴 : " + hashmap.get("menuname") + " " + "가격 : " + hashmap.get("menuprice") + "원");
+			JLabel lblBaguni = new JLabel("가게명 : " + hashmap.get("businessname")+ " " + "메뉴 : " + hashmap.get("menuname") + " " + "가격 : " + hashmap.get("menuprice") + "원"+ "  "+  "수량 : " + hashmap.get("menu_count"));
 			lblBaguni.setBounds(posX, posY + (i*50), 800, 50);
 			lblBaguni.setFont(font3);
 			
