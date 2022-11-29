@@ -35,7 +35,6 @@ public class MenuDAO extends DBConnection {
 			try {
 				if (rs != null) rs.close();
 				if (stmt != null) stmt.close();
-				if (con != null) con.close();
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -68,7 +67,6 @@ public class MenuDAO extends DBConnection {
 			try {
 				if (rs != null) rs.close();
 				if (stmt != null) stmt.close();
-				if (con != null) con.close();
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -78,7 +76,6 @@ public class MenuDAO extends DBConnection {
 	
 	public void insertBaguni(BaguniDTO dto) {
 		query = "insert into baguni(menu_no, m_id, menu_count) value(?,?,1)";
-		PreparedStatement pstmt = null;
 		
 		try {
 			pstmt = con.prepareStatement(query);
@@ -93,8 +90,7 @@ public class MenuDAO extends DBConnection {
 		} finally {
 			try {
 				if (rs != null) rs.close();
-				if (stmt != null) stmt.close();
-				if (con != null) con.close();
+				if (pstmt != null) pstmt.close();
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -131,7 +127,6 @@ public class MenuDAO extends DBConnection {
 			try {
 				if (rs != null) rs.close();
 				if (stmt != null) stmt.close();
-				if (con != null) con.close();
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -141,7 +136,6 @@ public class MenuDAO extends DBConnection {
 	
 	public void BaguniDelete(String m_id) {
 		query = "delete from baguni where m_id =?";
-		PreparedStatement pstmt = null;
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, m_id);
@@ -152,8 +146,7 @@ public class MenuDAO extends DBConnection {
 		} finally {
 			try {
 				if (rs != null) rs.close();
-				if (stmt != null) stmt.close();
-				if (con != null) con.close();
+				if (pstmt != null) pstmt.close();
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -162,7 +155,6 @@ public class MenuDAO extends DBConnection {
 	
 	public void BaguniSelectDelete(String m_id, int sb_no) {
 		query = "delete from baguni where m_id =? and sb_no =?";
-		PreparedStatement pstmt = null;
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, m_id);
@@ -174,8 +166,7 @@ public class MenuDAO extends DBConnection {
 		} finally {
 			try {
 				if (rs != null) rs.close();
-				if (stmt != null) stmt.close();
-				if (con != null) con.close();
+				if (pstmt != null) pstmt.close();
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -191,14 +182,13 @@ public class MenuDAO extends DBConnection {
 			pstmt.setString(2, m_id);
 			pstmt.setInt(3, sb_no);
 			pstmt.executeUpdate();
-			System.out.println("추가 성공");
+			System.out.println("수정 성공");
 		} catch(SQLException ex) {
 			ex.printStackTrace();
 		} finally {
 			try {
 				if (rs != null) rs.close();
-				if (stmt != null) stmt.close();
-				if (con != null) con.close();
+				if (pstmt != null) pstmt.close();
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
