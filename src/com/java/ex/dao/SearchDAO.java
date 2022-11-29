@@ -1,38 +1,13 @@
 package com.java.ex.dao;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.java.ex.dto.BusinessDTO;
-import com.java.ex.dto.MenuDTO;
+import com.java.ex.db.DBConnection;
 
-public class SearchDAO {
-	static String driver = "org.mariadb.jdbc.Driver";
-	static String url = "jdbc:mariadb://localhost:3306/delivery";
-	static String uid = "root";
-	static String pwd = "1234";
-	
-	Connection con = null;
-	Statement stmt = null;
-	ResultSet rs = null;
-	
-	private String query = null;
-	
-	public SearchDAO() {
-		try {
-			Class.forName(driver);
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
+public class SearchDAO extends DBConnection {
 	
 	public ArrayList<Map<String,Object>> SearchName(String name) {
 		query = "select b_name, b_id from business where b_name like '%" + name + "%'";
@@ -41,7 +16,6 @@ public class SearchDAO {
 		ArrayList<Map<String,Object>> BusinessName = new ArrayList<Map<String,Object>>();
 		
 		try {
-			con = DriverManager.getConnection(url, uid, pwd);
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(query);
 		

@@ -1,52 +1,24 @@
 package com.java.ex.dao;
 
-import java.sql.Connection;
 import java.sql.Date;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 
-import com.java.ex.dto.MenuDTO;
-import com.java.ex.dto.OrderDTO;
+import com.java.ex.db.DBConnection;
 
-public class OrderDAO {
-	static String driver = "org.mariadb.jdbc.Driver";
-	static String url = "jdbc:mariadb://localhost:3306/delivery";
-	static String uid = "root";
-	static String pwd = "1234";
-	
-	Connection con = null;
-	Statement stmt = null;
-	ResultSet rs = null;
-	
-	private String query = null;
-	
-	public OrderDAO() {
-		try {
-			Class.forName(driver);
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
+public class OrderDAO extends DBConnection {
+
 	public  ArrayList<Map<String,Object>> selectOrder(String id) {
 		query = "select  b_name, menuname, menuprice, o_datetime, o_state from business b, menu m, `order` o where b.b_id = m.b_id and m.b_id = o.b_id and o.m_id='" +id + "'";
 		ArrayList<Map<String,Object>> OrderList = new ArrayList<Map<String,Object>>();
 		
 		try {
-			con = DriverManager.getConnection(url, uid, pwd);
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(query);
 			
 			while(rs.next()) {		
-				
 				//int o_no = rs.getInt("o_no");
 				String b_name = rs.getString("b_name");
 				String menuname = rs.getString("menuname");

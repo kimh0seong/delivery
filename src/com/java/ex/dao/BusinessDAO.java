@@ -1,44 +1,19 @@
 package com.java.ex.dao;
 
-import java.sql.Connection;
 import java.sql.Date;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
+import com.java.ex.db.DBConnection;
 import com.java.ex.dto.BusinessDTO;
 import com.java.ex.dto.MemberDTO;
 
-public class BusinessDAO {
-	static String driver = "org.mariadb.jdbc.Driver";
-	static String url = "jdbc:mariadb://localhost:3306/delivery";
-	static String uid = "root";
-	static String pwd = "1234";
-	
-	Connection con = null;
-	Statement stmt = null;
-	ResultSet rs = null;
-	
-	private String query = null;
-	
-	public BusinessDAO() {
-		try {
-			Class.forName(driver);
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
+public class BusinessDAO extends DBConnection {
+		
 	public BusinessDTO selectBusiness(String id) {
 		query = "select * from business where b_id='"+id+"'";
 		BusinessDTO dto = null;
-		
 		try {
-			con = DriverManager.getConnection(url, uid, pwd);
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(query);
 			if(rs.next()==true) {
@@ -71,7 +46,6 @@ public class BusinessDAO {
 		ArrayList<BusinessDTO> dtos = new ArrayList<BusinessDTO>();
 		
 		try {
-			con = DriverManager.getConnection(url, uid, pwd);
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(query);
 			
@@ -104,7 +78,6 @@ public class BusinessDAO {
 		query = "delete from business where b_id='" + dto.getId() + "'";
 		
 		try {
-			con = DriverManager.getConnection(url, uid, pwd);
 			stmt = con.createStatement();
 			int result = stmt.executeUpdate(query);
 			if(result == 1) 
@@ -125,10 +98,8 @@ public class BusinessDAO {
 	
 	public void signUpBusiness(BusinessDTO dto) {
 		query = "insert into business value(?,?,?,?,?,?)";
-		PreparedStatement pstmt = null;
 		
 		try {
-			con = DriverManager.getConnection(url, uid, pwd);
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, dto.getId());
 			pstmt.setString(2, dto.getPw());
@@ -155,10 +126,8 @@ public class BusinessDAO {
 	
 	public void updateBusiness(BusinessDTO dto) {
 		query = "update business set b_pw = ?, b_name = ?, b_tel = ?, b_address = ?, where b_id = ?";
-		PreparedStatement pstmt = null;
 		
 		try {
-			con = DriverManager.getConnection(url, uid, pwd);
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, dto.getPw());
 			pstmt.setString(2, dto.getName());
