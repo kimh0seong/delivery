@@ -34,7 +34,6 @@ public class SearchDAO extends DBConnection {
 			try {
 				if (rs != null) rs.close();
 				if (stmt != null) stmt.close();
-				if (con != null) con.close();
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
