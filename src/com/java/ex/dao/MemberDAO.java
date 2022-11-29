@@ -1,27 +1,14 @@
 package com.java.ex.dao;
 
-import java.sql.Connection;
 import java.sql.Date;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
+import com.java.ex.db.DBConnection;
 import com.java.ex.dto.MemberDTO;
 
-public class MemberDAO {
-	static String driver = "org.mariadb.jdbc.Driver";
-	static String url = "jdbc:mariadb://localhost:3306/delivery";
-	static String uid = "root";
-	static String pwd = "1234";
-	
-	Connection con = null;
-	Statement stmt = null;
-	ResultSet rs = null;
-	
-	private String query = null;
+public class MemberDAO extends DBConnection {
 	
 	public MemberDAO() {
 		try {
@@ -37,7 +24,6 @@ public class MemberDAO {
 		MemberDTO dto = null;
 		
 		try {
-			con = DriverManager.getConnection(url, uid, pwd);
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(query);
 			if(rs.next()==true){
@@ -71,7 +57,6 @@ public class MemberDAO {
 		MemberDTO dto = null;
 		
 		try {
-			con = DriverManager.getConnection(url, uid, pwd);
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(query);
 			if(rs.next()==true){
@@ -106,7 +91,6 @@ public class MemberDAO {
 		ArrayList<MemberDTO> dtos = new ArrayList<MemberDTO>();
 		
 		try {
-			con = DriverManager.getConnection(url, uid, pwd);
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(query);
 			
@@ -143,7 +127,6 @@ public class MemberDAO {
 		query = "delete from member where id='" + dto.getId() + "'";
 		
 		try {
-			con = DriverManager.getConnection(url, uid, pwd);
 			stmt = con.createStatement();
 			int result = stmt.executeUpdate(query);
 			if(result == 1) 
@@ -167,7 +150,6 @@ public class MemberDAO {
 		PreparedStatement pstmt = null;
 		
 		try {
-			con = DriverManager.getConnection(url, uid, pwd);
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, dto.getId());
 			pstmt.setString(2, dto.getPw());
@@ -199,7 +181,6 @@ public class MemberDAO {
 		PreparedStatement pstmt = null;
 		
 		try {
-			con = DriverManager.getConnection(url, uid, pwd);
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, dto.getPw());
 			pstmt.setString(2, dto.getName());

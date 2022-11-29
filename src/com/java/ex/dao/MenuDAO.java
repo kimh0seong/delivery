@@ -1,48 +1,22 @@
 package com.java.ex.dao;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.java.ex.db.DBConnection;
 import com.java.ex.dto.BaguniDTO;
-import com.java.ex.dto.BusinessDTO;
-import com.java.ex.dto.MemberDTO;
 import com.java.ex.dto.MenuDTO;
 
-public class MenuDAO {
-	static String driver = "org.mariadb.jdbc.Driver";
-	static String url = "jdbc:mariadb://localhost:3306/delivery";
-	static String uid = "root";
-	static String pwd = "1234";
-	
-	Connection con = null;
-	Statement stmt = null;
-	ResultSet rs = null;
-	
-	private String query = null;
-	
-	public MenuDAO() {
-		try {
-			Class.forName(driver);
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
+public class MenuDAO extends DBConnection {
 	
 	public MenuDTO selectMenu(String id) {
 		query = "select * from menu where b_id='"+id+"'";
 		MenuDTO dto = null;
 		
 		try {
-			con = DriverManager.getConnection(url, uid, pwd);
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(query);
 			if(rs.next()==true) {
@@ -74,7 +48,6 @@ public class MenuDAO {
 		ArrayList<MenuDTO> dtos = new ArrayList<MenuDTO>();
 		
 		try {
-			con = DriverManager.getConnection(url, uid, pwd);
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(query);
 			
@@ -108,7 +81,6 @@ public class MenuDAO {
 		PreparedStatement pstmt = null;
 		
 		try {
-			con = DriverManager.getConnection(url, uid, pwd);
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, dto.getMenu_no());
 			pstmt.setString(2, dto.getM_id());
@@ -134,7 +106,6 @@ public class MenuDAO {
 		ArrayList<Map<String,Object>> BaguniList = new ArrayList<Map<String,Object>>();
 		
 		try {
-			con = DriverManager.getConnection(url, uid, pwd);
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(query);
 			
@@ -172,7 +143,6 @@ public class MenuDAO {
 		query = "delete from baguni where m_id =?";
 		PreparedStatement pstmt = null;
 		try {
-			con = DriverManager.getConnection(url, uid, pwd);
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, m_id);
 			pstmt.executeUpdate();
@@ -194,7 +164,6 @@ public class MenuDAO {
 		query = "delete from baguni where m_id =? and sb_no =?";
 		PreparedStatement pstmt = null;
 		try {
-			con = DriverManager.getConnection(url, uid, pwd);
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, m_id);
 			pstmt.setInt(2, sb_no);
