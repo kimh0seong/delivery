@@ -95,8 +95,6 @@ public class Baguni extends JFrame {
 					int Plus = JOptionPane.showConfirmDialog(null, "수량을 늘리시겠습니까?",
 							"수량 추가", JOptionPane.YES_NO_OPTION);
 					hashmap.put("menu_count", (int)hashmap.get("menu_count")+1);
-					System.out.println(sbno);
-					System.out.println(menu_count);
 					if(Plus == JOptionPane.YES_OPTION) {
 						dao.BaguniUpdate(member.getId(), (int)hashmap.get("menu_count"), sbno);
 						lblBaguni.setText("가게명 : " + hashmap.get("businessname")+ " " + "메뉴 : " + hashmap.get("menuname") + " " + "가격 : " + hashmap.get("menuprice") + "원"+ "  "+  "수량 : " + (int)hashmap.get("menu_count"));					
@@ -107,6 +105,22 @@ public class Baguni extends JFrame {
 			JButton btnMinus = new JButton("-");
 			btnMinus.setBounds(posX + 650, posY + (i * 60), 50, 50);
 			
+			btnMinus.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					int Minus = JOptionPane.showConfirmDialog(null, "수량을 내리겠습니까?",
+							"수량 감소 ", JOptionPane.YES_NO_OPTION);
+					int count = (int) hashmap.get("menu_count");
+					if(count > 1) {
+					//hashmap.put("menu_count", (int)hashmap.get("menu_count")-1);
+						if(Minus == JOptionPane.YES_OPTION) {
+							dao.BaguniUpdate(member.getId(), count-1, sbno);
+							lblBaguni.setText("가게명 : " + hashmap.get("businessname")+ " " + "메뉴 : " + hashmap.get("menuname") + " " + "가격 : " + hashmap.get("menuprice") + "원"+ "  "+  "수량 : " + (count-1));					
+						}
+					}
+				}
+			});
+			
 			btnDelete.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -116,11 +130,15 @@ public class Baguni extends JFrame {
 						dao.BaguniSelectDelete(member.getId(), sbno);
 						lblBaguni.setVisible(false);
 						btnDelete.setVisible(false);
+						btnPlus.setVisible(false);
+						btnMinus.setVisible(false);
 						
 						int index = lblBaguniList.indexOf(lblBaguni);
 						
 						lblBaguniList.remove(lblBaguni);
 						btnDeleteList.remove(btnDelete);
+						btnDeleteList.remove(btnPlus);
+						btnDeleteList.remove(btnMinus);
 						
 						for(int i = index; i < lblBaguniList.size(); i++) {
 							Point testNamePoint = lblBaguniList.get(i).getLocation();
@@ -139,7 +157,9 @@ public class Baguni extends JFrame {
 				}
 			});
 			lblBaguniList.add(lblBaguni);
-			btnDeleteList.add(btnDelete);		
+			btnDeleteList.add(btnDelete);
+			btnDeleteList.add(btnPlus);
+			btnDeleteList.add(btnMinus);
 			
 			pane.add(btnPlus);
 			pane.add(btnMinus);
