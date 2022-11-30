@@ -35,6 +35,8 @@ public class Baguni extends JFrame {
 	
 	ArrayList<JLabel> lblBaguniList = new ArrayList<JLabel>();
 	ArrayList<JButton> btnDeleteList = new ArrayList<JButton>();
+	ArrayList<JButton> btnPlusList = new ArrayList<JButton>();
+	ArrayList<JButton> btnMinusList = new ArrayList<JButton>();
 	
 	public Baguni() {
 		pane = new JPanel();
@@ -83,10 +85,14 @@ public class Baguni extends JFrame {
 			int sbno = (int) hashmap.get("sb_no");
 			
 			JButton btnDelete = new JButton("주문 취소");
-			btnDelete.setBounds(posX + 700, posY + (i * 60), 100, 50);
+			btnDelete.setBounds(posX + 700, posY + (i * 60), 100, 30);
 			
 			JButton btnPlus = new JButton("+");
-			btnPlus.setBounds(posX + 600, posY + (i * 60), 50, 50);
+			btnPlus.setBounds(posX + 600, posY + (i * 60), 45, 30);
+			
+			JButton btnMinus = new JButton("-");
+			btnMinus.setBounds(posX + 650, posY + (i * 60), 45, 30);
+			
 			
 			btnPlus.addActionListener(new ActionListener() {
 				@Override
@@ -104,20 +110,18 @@ public class Baguni extends JFrame {
 				}
 			});
 			
-			JButton btnMinus = new JButton("-");
-			btnMinus.setBounds(posX + 650, posY + (i * 60), 50, 50);
-			
 			btnMinus.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					int Minus = JOptionPane.showConfirmDialog(null, "수량을 내리겠습니까?",
 							"수량 감소 ", JOptionPane.YES_NO_OPTION);
-					int count = (int) hashmap.get("menu_count");
-					if(count > 1) {
-					//hashmap.put("menu_count", (int)hashmap.get("menu_count")-1);
+					int menu_count = (int)hashmap.get("menu_count") - 1;
+					hashmap.put("menu_count", menu_count);
+					if(menu_count > 1) {
 						if(Minus == JOptionPane.YES_OPTION) {
-							dao.BaguniUpdate(member.getId(), count-1, sbno);
-							lblBaguni.setText("가게명 : " + hashmap.get("businessname")+ " " + "메뉴 : " + hashmap.get("menuname") + " " + "가격 : " + hashmap.get("menuprice") + "원"+ "  "+  "수량 : " + (count-1));					
+							dao.BaguniUpdate(member.getId(), menu_count, sbno);
+							lblBaguni.setText("가게명 : " + hashmap.get("businessname")+ " " + "메뉴 : " + hashmap.get("menuname") + " " + "가격 : " + hashmap.get("menuprice") + "원"+ "  "+  "수량 : " + menu_count);					
+							
 						}
 					}
 				}
@@ -139,17 +143,25 @@ public class Baguni extends JFrame {
 						
 						lblBaguniList.remove(lblBaguni);
 						btnDeleteList.remove(btnDelete);
-						btnDeleteList.remove(btnPlus);
-						btnDeleteList.remove(btnMinus);
+						btnPlusList.remove(btnPlus);
+						btnMinusList.remove(btnMinus);
+						
 						
 						for(int i = index; i < lblBaguniList.size(); i++) {
 							Point testNamePoint = lblBaguniList.get(i).getLocation();
-							testNamePoint.y -= 60;
+							testNamePoint.y -= 55;
 							Point deletePoint = btnDeleteList.get(i).getLocation();
 							deletePoint.y -= 60;
+							Point PlusPoint = btnPlusList.get(i).getLocation();
+							PlusPoint.y -= 60;
+							Point MinusPoint = btnMinusList.get(i).getLocation();
+							MinusPoint.y -= 60;
+							
 							
 							lblBaguniList.get(i).setLocation(testNamePoint);
 							btnDeleteList.get(i).setLocation(deletePoint);
+							btnPlusList.get(i).setLocation(PlusPoint);
+							btnMinusList.get(i).setLocation(MinusPoint);
 						}
 						
 						Dimension di = pane.getPreferredSize();
@@ -160,8 +172,8 @@ public class Baguni extends JFrame {
 			});
 			lblBaguniList.add(lblBaguni);
 			btnDeleteList.add(btnDelete);
-			btnDeleteList.add(btnPlus);
-			btnDeleteList.add(btnMinus);
+			btnPlusList.add(btnPlus);
+			btnMinusList.add(btnMinus);
 			
 			pane.add(btnPlus);
 			pane.add(btnMinus);
@@ -175,6 +187,18 @@ public class Baguni extends JFrame {
 		add(lbl);
 		setVisible(true);
 		
+		MenuDAO payDao = new MenuDAO();
+		ArrayList<Map<String, Object>> payBaguniList = new ArrayList<Map<String, Object>>();
+		
+		payBaguniList = payDao.payBaguni(member.getId());
+		/*
+		for(int i=0; i<payBaguniList.size(); i++) {
+			HashMap<String, Object> hashmap = (HashMap<String, Object>) payBaguniList.get(i);
+			String menuname = (String) hashmap.get("menuname");
+			int menuprice = (int) hashmap.get("menuprice");
+			int menucount = (int) hashmap.get("menu_count");
+		}
+		*/
 		JButton btnBaguni = new JButton("주문하기");
 		btnBaguni.setBounds(325, 400, 150, 100);
 		btnBaguni.setFont(font2);
@@ -182,7 +206,12 @@ public class Baguni extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				
+				int pay = JOptionPane.showConfirmDialog(null, "주문하시겠습니까?",
+						"주문 확인", JOptionPane.YES_NO_OPTION);
+				if(pay == JOptionPane.YES_OPTION) {
+					setVisible(true);
+					
+				}
 			}
 		});
 		
