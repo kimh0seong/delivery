@@ -195,8 +195,8 @@ public class MenuDAO extends DBConnection {
 		}
 	}
 	
-	public  ArrayList<Map<String,Object>> payBaguni(String id) {
-		query = "select menuname, (menuprice*menu_count) as menupirce, menu_count from baguni b, menu m where b.menu_no = m.menu_no AND b.m_id = '" + id + "'";
+	public  ArrayList<Map<String,Object>> payBaguni(String m_id) {
+		query = "select menuname, (menuprice*menu_count) as menutotalprice, menu_count from baguni b, menu m where b.menu_no = m.menu_no AND b.m_id = '" + m_id + "'";
 		ArrayList<Map<String,Object>> payBaguniList = new ArrayList<Map<String,Object>>();
 		
 		try {
@@ -206,18 +206,19 @@ public class MenuDAO extends DBConnection {
 			while(rs.next()) {		
 				//String m_id = rs.getString("m_id");			
 				String menuname = rs.getString("menuname");
-				int menuprice = rs.getInt("menuprice");
+				int menuprice = rs.getInt("menutotalprice");
 				int menu_count = rs.getInt("menu_count");
 								
 				Map map = new HashMap<String, Object>();
 				//map.put("m_id",m_id);
 				map.put("menuname", menuname);
-				map.put("menuprice", menuprice);
+				map.put("menutotalprice", menuprice);
 				map.put("menu_count", menu_count);
 				payBaguniList.add(map);
+				System.out.println("성공");
 			}
 		} catch(SQLException ex) {
-			System.out.println("접속 실패");
+			ex.printStackTrace();
 		} finally {
 			try {
 				if (rs != null) rs.close();
