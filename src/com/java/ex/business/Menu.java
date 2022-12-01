@@ -81,7 +81,10 @@ public class Menu extends JFrame{
 			btnTake.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					
+					if(dao.isAnotherBusinessInBasket(member.getId(), bid) == true) {
+						JOptionPane.showMessageDialog(null, "다른 가게 메뉴가 존재합니다.");
+					}
+					else if(dao.isAnotherBusinessInBasket(member.getId(), bid) == false) {
 					setVisible(false);
 					MenuDAO dao = new MenuDAO();
 					BaguniDTO dto = new BaguniDTO();
@@ -90,6 +93,7 @@ public class Menu extends JFrame{
 					dao.insertBaguni(dto);
 					setVisible(true);
 					JOptionPane.showMessageDialog(null, "장바구니에 담았습니다.", "Success", JOptionPane.PLAIN_MESSAGE);
+					}
 				}
 			});
 			
