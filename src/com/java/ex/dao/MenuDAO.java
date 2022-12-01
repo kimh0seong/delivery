@@ -231,22 +231,25 @@ public class MenuDAO extends DBConnection {
 	}
 	
 	public boolean isAnotherBusinessInBasket(String m_id,String b_id) {
-		query = "select exists(select * from baguni b, menu m where b.m_id = ? and m.b_id = ?)";		
+		query = "select exists(select * from baguni b, menu m where b.m_id = '" + m_id + "' and m.b_id = '" + b_id + "')";
+		
 		
 		try {
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(query);
+			
 			while(rs.next()) {
-			int result = rs.getInt(0);
-			if(result ==1) {
+			int result = rs.getInt(1);
+			if(result == 1) {
 				return true;
 			} 
 			else if(result == 0){
 				return false;
 				}
 			}
-			
 		}catch(SQLException ex) {
+			ex.printStackTrace();
+			
 			System.out.println("접속 실ㅇㅇ패");
 		} finally {
 			try {
