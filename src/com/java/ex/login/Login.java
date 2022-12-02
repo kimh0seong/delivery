@@ -126,6 +126,7 @@ public class Login extends JFrame {
 				setVisible(false);
 				new Business(dto2);
 				System.out.println("¾÷Ã¼");
+				Session.setSession("business", dto2);
 				}
 			}
 			else {

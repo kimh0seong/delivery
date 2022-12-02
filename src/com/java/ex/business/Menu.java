@@ -84,7 +84,10 @@ public class Menu extends JFrame{
 					if(dao.isAnotherBusinessInBasket(member.getId(), bid) == true) {
 						JOptionPane.showMessageDialog(null, "다른 가게 메뉴가 존재합니다.");
 					}
-					else if(dao.isAnotherBusinessInBasket(member.getId(), bid) == false) {
+					else if(dao.SameMenu(member.getId(), bid, menu.getMenuname()) == true){
+						JOptionPane.showMessageDialog(null, "같은 메뉴가 장바구니에 존재합니다.");
+					}
+					else {
 					setVisible(false);
 					MenuDAO dao = new MenuDAO();
 					BaguniDTO dto = new BaguniDTO();

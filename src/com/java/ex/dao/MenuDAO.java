@@ -230,8 +230,9 @@ public class MenuDAO extends DBConnection {
 		return payBaguniList; 
 	}
 	
+ 
 	public boolean isAnotherBusinessInBasket(String m_id,String b_id) {
-		query = "select exists(select * from baguni b, menu m where b.m_id = '" + m_id + "' and m.b_id = '" + b_id + "')";
+		query = "select exists(select * from baguni b, menu m where b.menu_no = m.menu_no and b.m_id = '" + m_id + "' and m.b_id != '" + b_id + "')";
 		
 		
 		try {
@@ -261,8 +262,75 @@ public class MenuDAO extends DBConnection {
 		}
 		return false;
 	}
-
 	
+	
+	public boolean SameMenu(String m_id,String b_id,String menuname) {
+		query = "select exists(select * from baguni b, menu m where b.menu_no = m.menu_no and b.m_id = '" + m_id + "' and m.b_id = '" + b_id + "' and m.menuname = '" + menuname + "')";
+		
+		
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(query);
+			
+			while(rs.next()) {
+			int result = rs.getInt(1);
+			if(result == 1) {
+				return true;
+			} 
+			else if(result == 0){
+				return false;
+				}
+			}
+		}catch(SQLException ex) {
+			ex.printStackTrace();
+			
+			System.out.println("立加 角し菩");
+		} finally {
+			try {
+				if (rs != null) rs.close();
+				if (stmt != null) stmt.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+	}
+	
+	
+	
+	/*
+	public int isAnotherBusinessInBasket(String m_id,String b_id) {
+		query = "select exists(select * from baguni b, menu m where b.m_id = '" + m_id + "' and m.b_id = '" + b_id + "')";
+		
+		
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(query);
+			
+			while(rs.next()) {
+			int result = rs.getInt(1);
+			if(result == 1) {
+				return 1;
+			} 
+			else if(result == 0){
+				return 0;
+				}
+			}
+		}catch(SQLException ex) {
+			ex.printStackTrace();
+			
+			System.out.println("立加 角しし菩");
+		} finally {
+			try {
+				if (rs != null) rs.close();
+				if (stmt != null) stmt.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return 0 ;
+	}
+	*/
 
 
 
