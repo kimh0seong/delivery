@@ -17,6 +17,7 @@ import javax.swing.JScrollPane;
 import com.java.ex.dao.BusinessDAO;
 import com.java.ex.dto.BusinessDTO;
 import com.java.ex.dto.MemberDTO;
+import com.java.ex.dto.Session;
 //import com.java.management.test.TestEditor;
 import com.java.ex.login.Login;
 
@@ -28,8 +29,9 @@ public class Business extends JFrame {
 	
 	JPanel pane;
 	JScrollPane scroll;
+	BusinessDTO business = (BusinessDTO)Session.getSession("business");
 	
-	public Business(BusinessDTO BusinessDTO) {
+	public Business() {
 		pane = new JPanel();
 		pane.setLayout(null);
 		pane.setBackground(Color.white);
@@ -61,7 +63,7 @@ public class Business extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				//new UserInfoModify(memberDTO);
+				new BusinessModify();
 			}
 		});
 		

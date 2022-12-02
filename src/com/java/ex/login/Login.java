@@ -26,7 +26,7 @@ public class Login extends JFrame {
 	private JLabel lblID, lblPW;
 	private JTextField txtFieldID;
 	private JPasswordField txtFieldPW;
-	private JButton btnSignIn, btnSignUp;
+	private JButton btnSignIn, btnSignUp, btnBSignIn;
 	private JButton btnBSignUp;
 	
 	Point loginPoint;
@@ -59,9 +59,13 @@ public class Login extends JFrame {
 		txtFieldPW = new JPasswordField(20);
 		txtFieldPW.setBounds(loginPoint.x+100, loginPoint.y+50, 200, 30);
 		
-		btnSignIn = new JButton("로그인");
-		btnSignIn.setBounds(loginPoint.x, loginPoint.y+100, 300, 40);
+		btnSignIn = new JButton("고객 로그인");
+		btnSignIn.setBounds(loginPoint.x, loginPoint.y+100, 150, 40);
 		btnSignIn.addActionListener(new SignInEvent());
+		
+		btnBSignIn = new JButton("업체 로그인");
+		btnBSignIn.setBounds(loginPoint.x+150, loginPoint.y+100, 150, 40);
+		btnBSignIn.addActionListener(new BSignInEvent());
 		
 		btnSignUp = new JButton("고객용 회원가입");
 		btnSignUp.setBounds(loginPoint.x, loginPoint.y+150, 300, 30);
@@ -79,6 +83,7 @@ public class Login extends JFrame {
 		add(btnSignIn);
 		add(btnSignUp);
 		add(btnBSignUp);
+		add(btnBSignIn);
 		
 		setVisible(true);
 	}
@@ -87,7 +92,7 @@ public class Login extends JFrame {
 		Login login = new Login();
 	}
 	
-	// 로그인 이벤트
+	//고객 로그인 이벤트	
 	class SignInEvent implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -121,13 +126,6 @@ public class Login extends JFrame {
 					System.out.println("관리자");
 					Session.setSession("member", dto);
 				}
-			
-			else if(dto2.getPw().equals(txtFieldPW.getText())) {
-				setVisible(false);
-				new Business(dto2);
-				System.out.println("업체");
-				Session.setSession("business", dto2);
-				}
 			}
 			else {
 				JOptionPane.showMessageDialog(null, "잘못된 ID 또는 Password입니다.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -135,6 +133,38 @@ public class Login extends JFrame {
 			
 		}
 	}
+	
+	//업체 로그인 이벤트	
+		class BSignInEvent implements ActionListener {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//setVisible(false);
+				//new Management();		
+				
+				MemberDAO dao = new MemberDAO();
+				MemberDTO dto = new MemberDTO();
+				BusinessDAO dao2 = new BusinessDAO();
+				BusinessDTO dto2 = new BusinessDTO();
+				
+				dto = dao.selectMember(txtFieldID.getText());
+				dto2 = dao2.selectBusiness(txtFieldID.getText());
+				
+				if(dto==null && dto2==null) {
+					JOptionPane.showMessageDialog(null, "잘못된 ID 또는 Password입니다.", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				else if(dto2.getPw().equals(txtFieldPW.getText())) {
+						setVisible(false);
+						new Business();
+						System.out.println("업체");
+						Session.setSession("business", dto2);
+					}
+				
+				else {
+					JOptionPane.showMessageDialog(null, "잘못된 ID 또는 Password입니다.", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				
+			}
+		}
 	
 	// 회원가입 이벤트
 	class SignUpEvent implements ActionListener {
