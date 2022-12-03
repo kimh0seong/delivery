@@ -29,9 +29,10 @@ public class Business extends JFrame {
 	
 	JPanel pane;
 	JScrollPane scroll;
-	BusinessDTO business = (BusinessDTO)Session.getSession("business");
+	
 	
 	public Business() {
+		BusinessDTO business = (BusinessDTO)Session.getSession("business");
 		pane = new JPanel();
 		pane.setLayout(null);
 		pane.setBackground(Color.white);
@@ -67,56 +68,13 @@ public class Business extends JFrame {
 			}
 		});
 		
-		
-		JButton btnTestRecord = new JButton("주문내역");
-		btnTestRecord.setBounds(900, 10, 100, 50);
-		btnTestRecord.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				//new UserTestRecord(memberDTO, memberDTO.getId());
-			}
-		});
-		
-		BusinessDAO dao = new BusinessDAO();
-		ArrayList<BusinessDTO> dtos = new ArrayList<BusinessDTO>();
-		
-		//업체목록 불러서 띄우기
-		
-		BusinessDAO dao2 = new BusinessDAO();
-		ArrayList<BusinessDTO> dtos2 = new ArrayList<BusinessDTO>();
-		
-		//dtos2 = dao2.selectAllTest();
-		
-		for(int i = 0; i < dtos.size(); i++) {
-			String testId = String.valueOf(dtos.get(i).getId());
-			
-			JLabel lbl = new JLabel(dtos.get(i).getName());
-			lbl.setBounds(posX, posY + (i * 60), 300, 50);
-			lbl.setFont(font);
-			
-			JButton btnTestStart = new JButton("시험 시작");
-			btnTestStart.setBounds(posX + 650, posY + (i * 60), 150, 50);
-			btnTestStart.setFont(font2);
-			btnTestStart.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					setVisible(false);
-					//new Test(memberDTO, testId);
-				}
-			});
-			
-			pane.add(lbl);
-			pane.add(btnTestStart);
-			
-			Dimension di = pane.getPreferredSize();
-			di.height += 60;
-			pane.setPreferredSize(di);
-		}
+		JLabel lbl = new JLabel("주문 목록");
+		lbl.setBounds(posX + 55, posY, 300, 50);
+		lbl.setFont(font);
 		
 		add(btnUserInfoModify);
 		add(btnBack);
-		add(btnTestRecord);
+		add(lbl);
 		add(scroll);
 		setVisible(true);
 	}

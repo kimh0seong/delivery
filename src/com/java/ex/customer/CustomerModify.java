@@ -25,10 +25,11 @@ public class CustomerModify extends JFrame {
 	JTextField txtNickn;
 	JTextField txtAddress;
 	JTextField txtTel;
-	MemberDTO member = (MemberDTO)Session.getSession("member");
+	
 	
 	
 	public CustomerModify() {
+		MemberDTO member = (MemberDTO)Session.getSession("member");
 		setTitle("정보 수정");
 		setSize(400, 500);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,25 +42,8 @@ public class CustomerModify extends JFrame {
 		
 		txtID = new JTextField();
 		txtID.setBounds(posX+70, posY, 150, 30);
-		
-		JButton overBtn = new JButton("중복확인");
-		overBtn.setBounds(posX+230, posY+5, 100, 20);
-		
-		overBtn.addActionListener(new ActionListener() {						
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				MemberDAO dao = new MemberDAO();
-				BusinessDAO dao2 = new BusinessDAO();
-				if(dao.selectMember(txtID.getText()) !=  null || dao2.selectBusiness(txtID.getText()) != null) {
-					JOptionPane.showMessageDialog(null, "존재하는 아이디입니다.", "Error", JOptionPane.ERROR_MESSAGE);
-					return;
-				}else{
-					JOptionPane.showMessageDialog(null, "사용 가능한 아이디입니다.", "Success", JOptionPane.PLAIN_MESSAGE);
-					return;
-				}
-			}
-		});
+		txtID.setText(member.getId());
+		txtID.setEditable(false);
 		
 		JLabel lblPW = new JLabel("비밀번호");
 		lblPW.setBounds(posX, posY+35, 100, 40);
@@ -126,6 +110,7 @@ public class CustomerModify extends JFrame {
 			MemberDAO dao = new MemberDAO();
 			
 			MemberDTO dto = dao.selectMember(txtID.getText());
+			
 			dto.setPw(txtPW.getText());
 			dto.setName(txtName.getText());
 			dto.setNickn(txtNickn.getText());
@@ -133,6 +118,7 @@ public class CustomerModify extends JFrame {
 			dto.setTel(txtTel.getText());
 			
 			dao.updateMember(dto);
+			
 			setVisible(false);
 			new Login();
 			
@@ -164,7 +150,6 @@ public class CustomerModify extends JFrame {
 		add(txtTel);
 		add(btnModify);
 		add(btnBack);
-		add(overBtn);
 		add(overBtn2);
 		setVisible(true);
 	}

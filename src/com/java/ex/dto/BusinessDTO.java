@@ -6,26 +6,26 @@ public class BusinessDTO {
 	private String id;
 	private String pw;
 	private String name;
-	private String address;
 	private String tel;
+	private String address;
 	private Date reg_date;
 	
 	public BusinessDTO() {
 		id = "";
 		pw = "";
 		name = "";
-		address = "";
 		tel = "";
+		address = "";
 		reg_date = null;
 	}
 	
 	
-	public BusinessDTO(String id, String pw, String name, String address, String tel, Date reg_date) {
+	public BusinessDTO(String id, String pw, String name,  String tel, String address, Date reg_date) {
 		this.id = id;
 		this.pw = pw;
 		this.name = name;
-		this.address = address;
 		this.tel = tel;
+		this.address = address;
 		this.reg_date = reg_date;
 	}
 	

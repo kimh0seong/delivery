@@ -27,10 +27,11 @@ public class BusinessModify extends JFrame {
 	JTextField txtNickn;
 	JTextField txtAddress;
 	JTextField txtTel;
-	BusinessDTO business = (BusinessDTO)Session.getSession("business");
+	
 	
 	
 	public BusinessModify() {
+		BusinessDTO business = (BusinessDTO)Session.getSession("business");
 		setTitle("정보 수정");
 		setSize(400, 500);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,25 +44,8 @@ public class BusinessModify extends JFrame {
 		
 		txtID = new JTextField();
 		txtID.setBounds(posX+70, posY, 150, 30);
-		
-		JButton overBtn = new JButton("중복확인");
-		overBtn.setBounds(posX+230, posY+5, 100, 20);
-		
-		overBtn.addActionListener(new ActionListener() {						
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				MemberDAO dao = new MemberDAO();
-				BusinessDAO dao2 = new BusinessDAO();
-				if(dao.selectMember(txtID.getText()) !=  null || dao2.selectBusiness(txtID.getText()) != null) {
-					JOptionPane.showMessageDialog(null, "존재하는 아이디입니다.", "Error", JOptionPane.ERROR_MESSAGE);
-					return;
-				}else{
-					JOptionPane.showMessageDialog(null, "사용 가능한 아이디입니다.", "Success", JOptionPane.PLAIN_MESSAGE);
-					return;
-				}
-			}
-		});
+		txtID.setText(business.getId());
+		txtID.setEditable(false);
 		
 		JLabel lblPW = new JLabel("비밀번호");
 		lblPW.setBounds(posX, posY+35, 100, 40);
@@ -99,7 +83,6 @@ public class BusinessModify extends JFrame {
 				JOptionPane.showMessageDialog(null, "빈 칸이 있습니다", "Error", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
-			
 			BusinessDAO dao = new BusinessDAO();
 			
 			BusinessDTO dto = dao.selectBusiness(txtID.getText());
@@ -122,7 +105,7 @@ public class BusinessModify extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				new Customer();
+				new Business();
 			}
 		});
 		
@@ -138,11 +121,10 @@ public class BusinessModify extends JFrame {
 		add(txtTel);
 		add(btnModify);
 		add(btnBack);
-		add(overBtn);
 		setVisible(true);
 	}
 		boolean isBlanks() {
-			if(txtID.getText().equals("") || txtPW.getText().equals("") || txtName.getText().equals("") || txtNickn.getText().equals("") || txtAddress.getText().equals("") || txtTel.getText().equals("")) {
+			if(txtID.getText().equals("") || txtPW.getText().equals("") || txtName.getText().equals("") || txtAddress.getText().equals("") || txtTel.getText().equals("")) {
 				return true;
 			}
 			return false;

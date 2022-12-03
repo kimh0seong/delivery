@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,8 +19,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import com.java.ex.dao.MenuDAO;
-import com.java.ex.dto.BaguniDTO;
+import com.java.ex.dao.OrderDAO;
 import com.java.ex.dto.MemberDTO;
+import com.java.ex.dto.MenuDTO;
+import com.java.ex.dto.OrderDTO;
 import com.java.ex.dto.Session;
 
 public class Baguni extends JFrame {
@@ -187,6 +190,9 @@ public class Baguni extends JFrame {
 		add(lbl);
 		setVisible(true);
 
+		
+	
+		
 		JButton btnBaguni = new JButton("주문하기");
 		btnBaguni.setBounds(325, 400, 150, 100);
 		btnBaguni.setFont(font2);
@@ -214,6 +220,30 @@ public class Baguni extends JFrame {
 
 						lblPay.setText(
 								"메뉴 :" + " " + menuname + " " + "수량 :" + " " + menucount + " " + "가격 : " + menuprice);
+						
+						OrderDAO dao = new OrderDAO();
+						ArrayList<OrderDTO> dtos = new ArrayList<OrderDTO>();
+						
+						dtos = dao.selectAllOrder(member.getId());
+						
+						for(int j=0; i<dtos.size(); j++) {
+							OrderDTO order = dtos.get(j);
+							OrderDAO orderdao = new OrderDAO();
+							OrderDTO dto = new OrderDTO();
+							
+							//dto.setO_no(order.getO_no());
+							dto.setB_id(order.getB_id());
+							dto.setM_id(order.getM_id());
+							dto.setMenu_no(order.getMenu_no());
+							dto.setO_datetime(order.getO_datetime());
+							dto.setO_state(order.getO_state());
+							dto.setMenu_count(order.getMenu_count());
+							orderdao.insertOrder(dto);
+						}
+						
+						
+						
+						
 						pane.add(lblPay);
 						setVisible(true);
 					}

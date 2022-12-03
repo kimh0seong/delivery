@@ -29,8 +29,8 @@ public class MemberDAO extends DBConnection {
 			if(rs.next()==true){
 			
 				String pw = rs.getString("m_pw");
-				String address = rs.getString("m_name");
-				String name = rs.getString("m_address");
+				String name = rs.getString("m_name");
+				String address = rs.getString("m_address");
 				String tel = rs.getString("m_tel");
 				String nickn = rs.getString("m_nickn");
 				Date reg_date = rs.getDate("m_reg_date");
@@ -62,8 +62,8 @@ public class MemberDAO extends DBConnection {
 			
 				String id = rs.getString("m_id");
 				String pw = rs.getString("m_pw");
-				String address = rs.getString("m_name");
-				String name = rs.getString("m_address");
+				String name = rs.getString("m_name");
+				String address = rs.getString("m_address");
 				String tel = rs.getString("m_tel");
 				//String nickn = rs.getString("m_nickn");
 				Date reg_date = rs.getDate("m_reg_date");
