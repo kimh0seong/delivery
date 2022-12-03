@@ -18,10 +18,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import com.java.ex.dao.BaguniDAO;
 import com.java.ex.dao.MenuDAO;
 import com.java.ex.dao.OrderDAO;
+import com.java.ex.dto.BaguniDTO;
 import com.java.ex.dto.MemberDTO;
-import com.java.ex.dto.MenuDTO;
 import com.java.ex.dto.OrderDTO;
 import com.java.ex.dto.Session;
 
@@ -221,32 +222,34 @@ public class Baguni extends JFrame {
 						lblPay.setText(
 								"메뉴 :" + " " + menuname + " " + "수량 :" + " " + menucount + " " + "가격 : " + menuprice);
 						
-						OrderDAO dao = new OrderDAO();
-						ArrayList<OrderDTO> dtos = new ArrayList<OrderDTO>();
+						BaguniDAO dao = new BaguniDAO();
+						ArrayList<BaguniDTO> dtos = new ArrayList<BaguniDTO>();
 						
-						dtos = dao.selectAllOrder(member.getId());
+						dtos = dao.selectAllBaguni(member.getId());
+						
+						MenuDAO odao = new MenuDAO();
+						ArrayList<Map<String, Object>> Order = new ArrayList<Map<String, Object>>();
+						
+						Order = odao.selectAllOrder(member.getId());
 						
 						for(int j=0; i<dtos.size(); j++) {
-							OrderDTO order = dtos.get(j);
+							BaguniDTO baguni = dtos.get(j);
 							OrderDAO orderdao = new OrderDAO();
 							OrderDTO dto = new OrderDTO();
-							
-							//dto.setO_no(order.getO_no());
-							dto.setB_id(order.getB_id());
-							dto.setM_id(order.getM_id());
-							dto.setMenu_no(order.getMenu_no());
-							dto.setO_datetime(order.getO_datetime());
-							dto.setO_state(order.getO_state());
-							dto.setMenu_count(order.getMenu_count());
+										
+							dto.setB_id((String) hashmap.get("b_id"));
+							dto.setM_id(baguni.getM_id());
+							dto.setMenu_no(baguni.getMenu_no());
+							//dto.setO_datetime(order.getO_datetime());
+							//dto.setO_state(order.getO_state());
+							dto.setMenu_count(baguni.getMenu_count());
 							orderdao.insertOrder(dto);
-						}
-						
-						
-						
+						}													
 						
 						pane.add(lblPay);
 						setVisible(true);
-					}
+						}
+					
 				} else {
 					MenuDAO Dao = new MenuDAO();
 					ArrayList<Map<String, Object>> BaguniList = new ArrayList<Map<String, Object>>();

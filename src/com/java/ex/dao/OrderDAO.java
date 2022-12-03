@@ -84,8 +84,9 @@ public class OrderDAO extends DBConnection {
 		}
 	}
 	
+	/*
 	public ArrayList<OrderDTO> selectAllOrder(String mid) {
-		query = "select * from `order` where m_id = " + "'" + mid + "'";
+		query = "select b_id, o_datetime, o_state from `order` o, baguni b where o.menu_no = b.menu_no AND o.m_id = b.m_id AND o.m_id = '" + mid + "'";
 		ArrayList<OrderDTO> dtos = new ArrayList<OrderDTO>();
 		
 		try {
@@ -116,6 +117,6 @@ public class OrderDAO extends DBConnection {
 		}
 		return dtos; 
 	}
-	
+	*/
 	
 }
