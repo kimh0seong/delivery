@@ -1,6 +1,5 @@
 package com.java.ex.dao;
 
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;

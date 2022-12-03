@@ -12,15 +12,6 @@ import com.java.ex.dto.BusinessDTO;
 import com.java.ex.dto.MemberDTO;
 
 public class BusinessDAO extends DBConnection {
-	
-	public BusinessDAO() {
-		try {
-			Class.forName(driver);	
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
 		
 	public BusinessDTO selectBusiness(String id) {
 		query = "select * from business where b_id='"+id+"'";
