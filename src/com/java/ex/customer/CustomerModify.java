@@ -26,8 +26,6 @@ public class CustomerModify extends JFrame {
 	JTextField txtAddress;
 	JTextField txtTel;
 	
-	
-	
 	public CustomerModify() {
 		MemberDTO member = (MemberDTO)Session.getSession("member");
 		setTitle("정보 수정");

@@ -12,7 +12,7 @@ public class DBConnection {
 	public static String uid = "root";
 	public static String pwd = "1234";
 	
-	public Connection con = null;
+	public static Connection con = null;
 	
 	public Statement stmt = null;
 	public PreparedStatement pstmt = null;
@@ -21,12 +21,13 @@ public class DBConnection {
 	
 	public DBConnection() {
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, uid, pwd);
+			if(con == null) {
+				Class.forName(driver);
+				con = DriverManager.getConnection(url, uid, pwd);
+			}
 		} catch(Exception e) {
 			e.printStackTrace();
 			System.err.println("Exception[DBConnection] : " + e.getMessage());
 		}
-		
 	}
 }

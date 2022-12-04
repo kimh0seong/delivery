@@ -35,7 +35,7 @@ public class Baguni extends JFrame {
 
 	JPanel pane;
 	JScrollPane scroll;
-	MemberDTO member = (MemberDTO) Session.getSession("member");
+	
 
 	ArrayList<JLabel> lblBaguniList = new ArrayList<JLabel>();
 	ArrayList<JButton> btnDeleteList = new ArrayList<JButton>();
@@ -43,6 +43,7 @@ public class Baguni extends JFrame {
 	ArrayList<JButton> btnMinusList = new ArrayList<JButton>();
 
 	public Baguni() {
+		MemberDTO member = (MemberDTO) Session.getSession("member");
 		pane = new JPanel();
 		pane.setLayout(null);
 		pane.setBackground(Color.white);

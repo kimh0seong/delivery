@@ -10,15 +10,6 @@ import com.java.ex.dto.MemberDTO;
 
 public class MemberDAO extends DBConnection {
 	
-	public MemberDAO() {
-		try {
-			Class.forName(driver);	
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
 	public MemberDTO selectMember(String id) {
 		query = "select * from member where m_id='"+id+"'";
 		MemberDTO dto = null;

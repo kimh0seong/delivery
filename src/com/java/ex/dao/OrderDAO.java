@@ -7,8 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.java.ex.db.DBConnection;
-import com.java.ex.dto.BaguniDTO;
-import com.java.ex.dto.MenuDTO;
 import com.java.ex.dto.OrderDTO;
 
 public class OrderDAO extends DBConnection {
