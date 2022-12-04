@@ -232,12 +232,14 @@ public class Baguni extends JFrame {
 						
 						Order = odao.selectAllOrder(member.getId());
 						
-						for(int j=0; i<dtos.size(); j++) {
+						for(int j=0; j<dtos.size(); j++) {
 							BaguniDTO baguni = dtos.get(j);
 							OrderDAO orderdao = new OrderDAO();
 							OrderDTO dto = new OrderDTO();
 										
 							dto.setB_id((String) hashmap.get("b_id"));
+							dto.setO_datetime((Date) hashmap.get("o_datetime"));
+							dto.setO_state((String) hashmap.get("o_state"));
 							dto.setM_id(baguni.getM_id());
 							dto.setMenu_no(baguni.getMenu_no());
 							//dto.setO_datetime(order.getO_datetime());

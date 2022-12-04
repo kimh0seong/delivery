@@ -197,7 +197,8 @@ public class MenuDAO extends DBConnection {
 	}
 	
 	public  ArrayList<Map<String,Object>> payBaguni(String m_id) {
-		query = "select b_id, menuname, (menuprice*menu_count) as menutotalprice, menu_count from baguni b, menu m where b.menu_no = m.menu_no AND b.m_id = '" + m_id + "'";
+		//query = "select b_id, menuname, (menuprice*menu_count) as menutotalprice, menu_count from baguni b, menu m where b.menu_no = m.menu_no AND b.m_id = '" + m_id + "'";
+		query = "select m.b_id, o_datetime, o_state, menuname, (menuprice*b.menu_count) as menutotalprice, b.menu_count from baguni b, menu m, `order` o  where b.menu_no = m.menu_no AND o.menu_no = m.menu_no and b.m_id = '" + m_id + "'";
 		ArrayList<Map<String,Object>> payBaguniList = new ArrayList<Map<String,Object>>();
 		
 		try {
@@ -205,13 +206,17 @@ public class MenuDAO extends DBConnection {
 			rs = stmt.executeQuery(query);
 			
 			while(rs.next()) {		
-				String b_id = rs.getString("b_id");			
+				String b_id = rs.getString("b_id");	
+				Date o_datetime = rs.getDate("o_datetime");
+				String o_state = rs.getString("o_state");
 				String menuname = rs.getString("menuname");
 				int menuprice = rs.getInt("menutotalprice");
 				int menu_count = rs.getInt("menu_count");
 								
 				Map map = new HashMap<String, Object>();
 				map.put("b_id",b_id);
+				map.put("o_datetime", o_datetime);
+				map.put("o_state", o_state);
 				map.put("menuname", menuname);
 				map.put("menutotalprice", menuprice);
 				map.put("menu_count", menu_count);
