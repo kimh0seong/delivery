@@ -12,8 +12,8 @@ import com.java.ex.dto.MenuDTO;
 
 public class MenuDAO extends DBConnection {
 	
-	public MenuDTO selectMenu(String id) {
-		query = "select * from menu where b_id='"+id+"'";
+	public MenuDTO selectMenu(int menuno) {
+		query = "select * from menu where menu_no = '" + menuno + "'";
 		MenuDTO dto = null;
 		
 		try {
@@ -23,10 +23,10 @@ public class MenuDAO extends DBConnection {
 				int menu_no = rs.getInt("menu_no");
 				String b_id = rs.getString("b_id");
 				String menuname = rs.getString("menuname");
-				int menupirce = rs.getInt("menupirce");
+				int menuprice = rs.getInt("menuprice");
 				String menupic = rs.getString("menupic");
 			
-				dto = new MenuDTO(0, id, menuname, 0, menupic);
+				dto = new MenuDTO(menu_no, b_id, menuname, menuprice, menupic);
 			} 
 			
 		}catch(SQLException ex) {

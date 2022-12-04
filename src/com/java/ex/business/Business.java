@@ -10,21 +10,22 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import com.java.ex.dao.BusinessDAO;
+import com.java.ex.dao.OrderDAO;
 import com.java.ex.dto.BusinessDTO;
-import com.java.ex.dto.MemberDTO;
+import com.java.ex.dto.OrderDTO;
 import com.java.ex.dto.Session;
 //import com.java.management.test.TestEditor;
 import com.java.ex.login.Login;
+import com.java.ex.order.CustomerOrder;
 
 public class Business extends JFrame {
 	
 	Font font = new Font("돋움", Font.BOLD, 30);
 	Font font2 = new Font("돋움", Font.BOLD, 20);
+	Font font3 = new Font("돋움", Font.BOLD, 10);
 	int posX = 20, posY = 20;
 	
 	JPanel pane;
@@ -49,7 +50,7 @@ public class Business extends JFrame {
 		setResizable(false);
 		
 		JButton btnBack = new JButton("뒤로가기");
-		btnBack.setBounds(10, 10, 100, 50);
+		btnBack.setBounds(710, 10, 100, 50);
 		btnBack.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -59,7 +60,7 @@ public class Business extends JFrame {
 		});
 		
 		JButton btnUserInfoModify = new JButton("회원정보");
-		btnUserInfoModify.setBounds(780, 10, 100, 50);
+		btnUserInfoModify.setBounds(830, 10, 100, 50);
 		btnUserInfoModify.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -69,8 +70,42 @@ public class Business extends JFrame {
 		});
 		
 		JLabel lbl = new JLabel("주문 목록");
-		lbl.setBounds(posX + 55, posY, 300, 50);
+		lbl.setBounds(posX + 60, posY, 300, 50);
 		lbl.setFont(font);
+		
+		OrderDAO dao = new OrderDAO();
+		ArrayList<OrderDTO> dtos = new ArrayList<OrderDTO>();
+		
+		//주문 리스트 불러오기
+		System.out.println(business.getId());
+		dtos = dao.selectAllOrder(business.getId());
+		
+		for(int i = 0; i < dtos.size(); i++) {
+			OrderDTO dtos2 = dtos.get(i); 
+			
+			JLabel lbl2 = new JLabel(dtos.get(i).getM_id());
+			
+			lbl2.setBounds(posX, posY + (i * 50), 300, 50);
+			lbl2.setFont(font);
+			JButton btnBusiness = new JButton("보기");
+			btnBusiness.setBounds(posX+700, posY + (i*50), 100, 45);
+			btnBusiness.setFont(font2);
+			btnBusiness.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					setVisible(false);
+					new CustomerOrder();
+				}
+			});
+					
+			pane.add(lbl2);
+			pane.add(btnBusiness);
+			
+			Dimension di = pane.getPreferredSize();
+			di.height += 60;
+			pane.setPreferredSize(di);
+		}
+		
 		
 		add(btnUserInfoModify);
 		add(btnBack);

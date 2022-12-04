@@ -86,7 +86,7 @@ public class Customer extends JFrame {
 					lblBname.setBounds(posX, posY+(i*50), 300, 50);
 					lblBname.setFont(font2);
 					JButton btnBusiness = new JButton("보기");
-					btnBusiness.setBounds(posX+500, posY + (i*50), 100, 45);
+					btnBusiness.setBounds(posX+700, posY + (i*50), 100, 45);
 					btnBusiness.setFont(font2);
 					pane.add(lblBname);
 					pane.add(btnBusiness);
@@ -143,7 +143,7 @@ public class Customer extends JFrame {
 			lbl.setBounds(posX, posY + (i * 50), 300, 50);
 			lbl.setFont(font);
 			JButton btnBusiness = new JButton("보기");
-			btnBusiness.setBounds(posX+500, posY + (i*50), 100, 45);
+			btnBusiness.setBounds(posX+700, posY + (i*50), 100, 45);
 			btnBusiness.setFont(font2);
 			btnBusiness.addActionListener(new ActionListener() {
 				@Override

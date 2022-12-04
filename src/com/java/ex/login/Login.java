@@ -137,9 +137,7 @@ public class Login extends JFrame {
 	//업체 로그인 이벤트	
 		class BSignInEvent implements ActionListener {
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				//setVisible(false);
-				//new Management();		
+			public void actionPerformed(ActionEvent e) {	
 				
 				MemberDAO dao = new MemberDAO();
 				MemberDTO dto = new MemberDTO();
@@ -153,10 +151,10 @@ public class Login extends JFrame {
 					JOptionPane.showMessageDialog(null, "잘못된 ID 또는 Password입니다.", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				else if(dto2.getPw().equals(txtFieldPW.getText())) {
-						setVisible(false);
-						new Business();
+						setVisible(false);						
 						System.out.println("업체");
 						Session.setSession("business", dto2);
+						new Business();
 					}
 				
 				else {

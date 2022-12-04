@@ -82,9 +82,9 @@ public class OrderDAO extends DBConnection {
 		}
 	}
 	
-	/*
-	public ArrayList<OrderDTO> selectAllOrder(String mid) {
-		query = "select b_id, o_datetime, o_state from `order` o, baguni b where o.menu_no = b.menu_no AND o.m_id = b.m_id AND o.m_id = '" + mid + "'";
+	
+	public ArrayList<OrderDTO> selectAllOrder(String bid) {
+		query = "select * from `order` where b_id = '" + bid + "'";
 		ArrayList<OrderDTO> dtos = new ArrayList<OrderDTO>();
 		
 		try {
@@ -104,7 +104,7 @@ public class OrderDAO extends DBConnection {
 				dtos.add(dto);
 			}
 		} catch(SQLException ex) {
-			System.out.println("立加 角菩");
+			System.out.println("立加 ddd角菩");
 		} finally {
 			try {
 				if (rs != null) rs.close();
@@ -115,6 +115,45 @@ public class OrderDAO extends DBConnection {
 		}
 		return dtos; 
 	}
-	*/
+	
+	public  ArrayList<Map<String,Object>> CustomerOrder(String b_id) {
+		//query = "select b_id, menuname, (menuprice*menu_count) as menutotalprice, menu_count from baguni b, menu m where b.menu_no = m.menu_no AND b.m_id = '" + m_id + "'";
+		query = "select o.m_id, o_datetime, o_state, menuname, (menuprice*b.menu_count) as menutotalprice, b.menu_count from baguni b, menu m, `order` o  where b.menu_no = m.menu_no AND o.menu_no = m.menu_no and b.m_id = '" + b_id + "'";
+		ArrayList<Map<String,Object>> payBaguniList = new ArrayList<Map<String,Object>>();
+		
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(query);
+			
+			while(rs.next()) {		
+				String m_id = rs.getString("m_id");	
+				Date o_datetime = rs.getDate("o_datetime");
+				String o_state = rs.getString("o_state");
+				String menuname = rs.getString("menuname");
+				int menuprice = rs.getInt("menutotalprice");
+				int menu_count = rs.getInt("menu_count");
+								
+				Map map = new HashMap<String, Object>();
+				map.put("b_id",b_id);
+				map.put("o_datetime", o_datetime);
+				map.put("o_state", o_state);
+				map.put("menuname", menuname);
+				map.put("menutotalprice", menuprice);
+				map.put("menu_count", menu_count);
+				payBaguniList.add(map);
+				System.out.println("己傍");
+			}
+		} catch(SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) rs.close();
+				if (stmt != null) stmt.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return payBaguniList; 
+	}
 	
 }
