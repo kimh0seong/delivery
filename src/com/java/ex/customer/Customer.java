@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,20 +12,15 @@ import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import com.java.ex.business.Menu;
 import com.java.ex.dao.BusinessDAO;
-import com.java.ex.dao.MemberDAO;
-import com.java.ex.dao.OrderDAO;
 import com.java.ex.dao.SearchDAO;
 import com.java.ex.dto.BusinessDTO;
 import com.java.ex.dto.MemberDTO;
-import com.java.ex.dto.MenuDTO;
-import com.java.ex.dto.OrderDTO;
 import com.java.ex.dto.Session;
 //import com.java.management.test.TestEditor;
 import com.java.ex.login.Login;
@@ -41,9 +35,10 @@ public class Customer extends JFrame {
 	JTextField txtSearch;
 	JPanel pane;
 	JScrollPane scroll;
-	MemberDTO member = (MemberDTO)Session.getSession("member");
+	
 	
 	public Customer() {
+		MemberDTO member = (MemberDTO)Session.getSession("member");
 		pane = new JPanel();
 		pane.setLayout(null);
 		pane.setBackground(Color.white);
