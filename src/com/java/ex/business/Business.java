@@ -94,7 +94,7 @@ public class Business extends JFrame {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					setVisible(false);
-					new CustomerOrder();
+					new CustomerOrder(business.getId());
 				}
 			});
 					

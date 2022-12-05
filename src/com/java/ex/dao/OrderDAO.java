@@ -156,4 +156,45 @@ public class OrderDAO extends DBConnection {
 		return payBaguniList; 
 	}
 	
+	public  ArrayList<Map<String,Object>> OrderList(String bid) {
+		query = "select menuname, m_address, m_tel, o_datetime, o_state, (menuprice*menu_count) as menutotalprice, menu_count from member m, menu me, `order` o  WHERE m.m_id = o.m_id AND o.menu_no = me.menu_no and m.m_id = '" + bid + "'";;
+		ArrayList<Map<String,Object>> CustomerOrderList = new ArrayList<Map<String,Object>>();
+		
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(query);
+			
+			while(rs.next()) {		
+				String menuname = rs.getString("menuname");	
+				String m_address = rs.getString("m_address");
+				String m_tel = rs.getString("m_tel");
+				Date o_datetime = rs.getDate("o_datetime");
+				String o_state = rs.getString("o_state");
+				int menuprice = rs.getInt("menutotalprice");
+				int menu_count = rs.getInt("menu_count");
+				
+				Map map = new HashMap<String, Object>();
+				map.put("menuname", menuname);
+				map.put("m_address", m_address);
+				map.put("m_tel", m_tel);
+				map.put("o_datetime", o_datetime);
+				map.put("o_state", o_state);
+				map.put("menutotalprice", menuprice);
+				map.put("menu_count", menu_count);
+				CustomerOrderList.add(map);
+				System.out.println("¼º°ø");
+			}
+		} catch(SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) rs.close();
+				if (stmt != null) stmt.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return CustomerOrderList; 
+	}
+	
 }
