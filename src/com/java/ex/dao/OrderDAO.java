@@ -156,8 +156,10 @@ public class OrderDAO extends DBConnection {
 		return payBaguniList; 
 	}
 	
-	public  ArrayList<Map<String,Object>> OrderList(String bid) {
-		query = "select menuname, m_address, m_tel, o_datetime, o_state, (menuprice*menu_count) as menutotalprice, menu_count from member m, menu me, `order` o  WHERE m.m_id = o.m_id AND o.menu_no = me.menu_no and m.m_id = '" + bid + "'";;
+	public  ArrayList<Map<String,Object>> OrderList(String m_id, String b_id) {
+		query = "select menuname, m_address, m_tel, o_datetime, o_state, (menuprice*menu_count) as menutotalprice, menu_count "
+			  + "from member m, menu me, `order` o  "
+			  + "WHERE m.m_id = o.m_id AND o.menu_no = me.menu_no and m.m_id = '" + m_id + "' AND me.b_id = '"+ b_id +"'";
 		ArrayList<Map<String,Object>> CustomerOrderList = new ArrayList<Map<String,Object>>();
 		
 		try {

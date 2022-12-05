@@ -19,8 +19,6 @@ import javax.swing.JScrollPane;
 import com.java.ex.business.Business;
 import com.java.ex.dao.OrderDAO;
 import com.java.ex.dto.BusinessDTO;
-import com.java.ex.dto.MenuDTO;
-import com.java.ex.dto.OrderDTO;
 import com.java.ex.dto.Session;
 
 public class CustomerOrder extends JFrame{
@@ -33,8 +31,9 @@ public class CustomerOrder extends JFrame{
 	JScrollPane scroll;
 	
 	
-	public CustomerOrder() { 
-		BusinessDTO business = (BusinessDTO)Session.getSession("business");
+	public CustomerOrder(String m_id) { 
+		BusinessDTO bussiness = (BusinessDTO)Session.getSession("business");
+		
 		pane = new JPanel();
 		pane.setLayout(null);
 		pane.setBackground(Color.white);
@@ -62,10 +61,7 @@ public class CustomerOrder extends JFrame{
 		
 		
 		OrderDAO dao = new OrderDAO();
-		ArrayList<Map<String, Object>> CustomerOrderList = new ArrayList<Map<String, Object>>();
-		CustomerOrderList = dao.OrderList(business.getId());
-		
-		
+		ArrayList<Map<String, Object>> CustomerOrderList = dao.OrderList(m_id, bussiness.getId());
 		
 		for(int i = 0; i < CustomerOrderList.size(); i++) {
 			HashMap<String, Object> hashmap = (HashMap<String, Object>) CustomerOrderList.get(i);				
@@ -75,7 +71,7 @@ public class CustomerOrder extends JFrame{
 			String tel = (String) hashmap.get("m_tel");
 			Date odatetime = (Date) hashmap.get("o_datetime");
 			String state = (String) hashmap.get("o_state");
-			int count = (int) hashmap.get("menucount");
+			int count = (int) hashmap.get("menu_count");
 			int price = (int) hashmap.get("menutotalprice");
 			
 			JLabel lbl = new JLabel("");
