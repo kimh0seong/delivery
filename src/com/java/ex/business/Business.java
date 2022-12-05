@@ -87,8 +87,8 @@ public class Business extends JFrame {
 			
 			lbl2.setBounds(posX, posY + (i * 50), 300, 50);
 			lbl2.setFont(font);
-			JButton btnBusiness = new JButton("보기");
-			btnBusiness.setBounds(posX+700, posY + (i*50), 100, 45);
+			JButton btnBusiness = new JButton("주문 상세 보기");
+			btnBusiness.setBounds(posX+600, posY + (i*50), 200, 45);
 			btnBusiness.setFont(font2);
 			btnBusiness.addActionListener(new ActionListener() {
 				@Override

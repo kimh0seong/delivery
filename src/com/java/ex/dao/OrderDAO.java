@@ -84,7 +84,7 @@ public class OrderDAO extends DBConnection {
 	
 	
 	public ArrayList<OrderDTO> selectAllOrder(String bid) {
-		query = "select * from `order` where b_id = '" + bid + "'";
+		query = "select * from `order` where b_id = '" + bid + "' group by m_id";
 		ArrayList<OrderDTO> dtos = new ArrayList<OrderDTO>();
 		
 		try {
@@ -115,6 +115,7 @@ public class OrderDAO extends DBConnection {
 		}
 		return dtos; 
 	}
+	
 	
 	public  ArrayList<Map<String,Object>> CustomerOrder(String b_id) {
 		//query = "select b_id, menuname, (menuprice*menu_count) as menutotalprice, menu_count from baguni b, menu m where b.menu_no = m.menu_no AND b.m_id = '" + m_id + "'";

@@ -25,6 +25,7 @@ public class CustomerOrder extends JFrame{
 	Font font = new Font("돋움", Font.BOLD, 30);
 	Font font2 = new Font("돋움", Font.BOLD, 20);
 	Font font3 = new Font("돋움", Font.BOLD, 15);
+	Font font4 = new Font("돋움", Font.BOLD, 12);
 	int posX = 20, posY = 20;
 	
 	JPanel pane;
@@ -40,7 +41,7 @@ public class CustomerOrder extends JFrame{
 		pane.setPreferredSize(new Dimension(20, 20));
 		
 		scroll = new JScrollPane(pane);
-		scroll.setBounds(80,80,850,300);
+		scroll.setBounds(80,80,1500,600);
 		
 		JButton btnBack = new JButton("뒤로가기");
 		btnBack.setBounds(10, 10, 100, 50);
@@ -53,7 +54,7 @@ public class CustomerOrder extends JFrame{
 		});
 		
 		setTitle("고객주문");
-		setSize(1024, 576);
+		setSize(1700, 900);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(null); // 절대 위치
 		setLocationRelativeTo(null); // 화면 중앙 배치
@@ -74,13 +75,36 @@ public class CustomerOrder extends JFrame{
 			int count = (int) hashmap.get("menu_count");
 			int price = (int) hashmap.get("menutotalprice");
 			
+			
 			JLabel lbl = new JLabel("");
 			lbl.setText("주문한 메뉴 : " + menuname + " " + "주소 : " + address + " " +
 			"전화번호 : " + tel + " " + "주문 날짜 : " + odatetime + " " + "배달 상태 : " + 
 					state + " " + "수량 : " + count + " " + "가격 : " + price + "원");
-			lbl.setBounds(posX, posY +  (i * 50), 300, 50);
-			lbl.setFont(font3);
+			lbl.setBounds(posX, posY +  (i * 50), 1500, 50);
+			lbl.setFont(font2);
+			JButton btnState = new JButton("배달 완료");
+			btnState.setBounds(posX + 1130, posY + (i * 50), 150, 35);
+			btnState.setFont(font3);
+			JButton btnOrderCancle = new JButton("주문 취소");
+			btnOrderCancle.setBounds(posX + 1300, posY + (i * 50), 150, 35);
+			btnOrderCancle.setFont(font3);
 			pane.add(lbl);
+			pane.add(btnOrderCancle);
+			pane.add(btnState);
+			/*
+			JLabel lbl = new JLabel("");
+			lbl.setText("주문 날짜 : " + odatetime + " " + "배달 상태 : " + "주소 : " + address + " " +
+			"전화번호 : " + tel);
+			lbl.setBounds(posX, posY +  (i * 50), 1000, 50);
+			lbl.setFont(font3);
+			JLabel lbl2 = new JLabel("");
+			lbl2.setText("주문한 메뉴 : " + menuname + " " + "수량 : " + count + " " + "가격 : " + price + "원");
+			
+			lbl2.setBounds(posX, posY + 100 + (i * 50), 1000, 50);
+			lbl2.setFont(font3);
+			pane.add(lbl);
+			pane.add(lbl2);
+			*/
 			Dimension di = pane.getPreferredSize();
 			di.height += 60;
 			pane.setPreferredSize(di);
