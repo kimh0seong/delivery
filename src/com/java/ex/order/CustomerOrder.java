@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -32,7 +33,7 @@ public class CustomerOrder extends JFrame{
 	JScrollPane scroll;
 	
 	
-	public CustomerOrder(String bid) { 
+	public CustomerOrder() { 
 		BusinessDTO business = (BusinessDTO)Session.getSession("business");
 		pane = new JPanel();
 		pane.setLayout(null);
@@ -62,24 +63,33 @@ public class CustomerOrder extends JFrame{
 		
 		OrderDAO dao = new OrderDAO();
 		ArrayList<Map<String, Object>> CustomerOrderList = new ArrayList<Map<String, Object>>();
-		CustomerOrderList = dao.OrderList(bid);
+		CustomerOrderList = dao.OrderList(business.getId());
+		
 		
 		
 		for(int i = 0; i < CustomerOrderList.size(); i++) {
 			HashMap<String, Object> hashmap = (HashMap<String, Object>) CustomerOrderList.get(i);				
 			
-			JLabel lbl = new JLabel("주문한 메뉴 : " + hashmap.get("menuname") + " " + "주소 : " + hashmap.get("m_address") + " " +
-			"전화번호 : " + hashmap.get("m_tel") + " " + "주문 날짜 : " + hashmap.get("o_datetime") + " " + "배달 상태 : " + 
-					hashmap.get("o_state") + " " + "수량 : " + hashmap.get("menucount") + " " + "가격 : " + hashmap.get("menupirce")+ "원");
-			lbl.setBounds(posX, posY + (i * 50), 300, 50);
-			lbl.setFont(font3);
+			String menuname = (String) hashmap.get("menuname");
+			String address = (String) hashmap.get("m_address");
+			String tel = (String) hashmap.get("m_tel");
+			Date odatetime = (Date) hashmap.get("o_datetime");
+			String state = (String) hashmap.get("o_state");
+			int count = (int) hashmap.get("menucount");
+			int price = (int) hashmap.get("menutotalprice");
 			
+			JLabel lbl = new JLabel("");
+			lbl.setText("주문한 메뉴 : " + menuname + " " + "주소 : " + address + " " +
+			"전화번호 : " + tel + " " + "주문 날짜 : " + odatetime + " " + "배달 상태 : " + 
+					state + " " + "수량 : " + count + " " + "가격 : " + price + "원");
+			lbl.setBounds(posX, posY +  (i * 50), 300, 50);
+			lbl.setFont(font3);
 			pane.add(lbl);
 			Dimension di = pane.getPreferredSize();
 			di.height += 60;
 			pane.setPreferredSize(di);
 		}	
-			
+		
 		add(scroll);
 		add(btnBack);
 		setVisible(true);

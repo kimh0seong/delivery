@@ -186,6 +186,7 @@ public class OrderDAO extends DBConnection {
 			}
 		} catch(SQLException ex) {
 			ex.printStackTrace();
+			System.out.println("½ÇÆÐ");
 		} finally {
 			try {
 				if (rs != null) rs.close();
