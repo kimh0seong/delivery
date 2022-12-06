@@ -58,6 +58,7 @@ public class CustomerOrder extends JFrame {
 				new Business();
 			}
 		});
+		
 
 		setTitle("∞Ì∞¥¡÷πÆ");
 		setSize(1700, 900);

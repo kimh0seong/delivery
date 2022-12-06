@@ -59,6 +59,26 @@ public class Business extends JFrame {
 			}
 		});
 		
+		JButton btnMenu = new JButton("매출");
+		btnMenu.setBounds(590, 10, 100, 50);
+		btnMenu.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				new SaleList();
+			}
+		});
+		
+		JButton btnSales = new JButton("메뉴");
+		btnSales.setBounds(470, 10, 100, 50);
+		btnSales.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				new BusinessMenu(business.getId());
+			}
+		});
+		
 		JButton btnUserInfoModify = new JButton("회원정보");
 		btnUserInfoModify.setBounds(830, 10, 100, 50);
 		btnUserInfoModify.addActionListener(new ActionListener() {
@@ -106,7 +126,8 @@ public class Business extends JFrame {
 			pane.setPreferredSize(di);
 		}
 		
-		
+		add(btnMenu);
+		add(btnSales);
 		add(btnUserInfoModify);
 		add(btnBack);
 		add(lbl);

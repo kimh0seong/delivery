@@ -17,20 +17,22 @@ import javax.swing.JScrollPane;
 import com.java.ex.customer.Customer;
 import com.java.ex.dao.MenuDAO;
 import com.java.ex.dto.BaguniDTO;
+import com.java.ex.dto.BusinessDTO;
 import com.java.ex.dto.MemberDTO;
 import com.java.ex.dto.MenuDTO;
 import com.java.ex.dto.Session;
 
-public class Menu extends JFrame{
+public class BusinessMenu extends JFrame{
 	Font font = new Font("돋움", Font.BOLD, 30);
 	Font font2 = new Font("돋움", Font.BOLD, 20);
 	int posX = 20, posY = 20;
 	
 	JPanel pane;
 	JScrollPane scroll;
-	MemberDTO member = (MemberDTO)Session.getSession("member");
 	
-	public Menu(String bid) { //Customer에서 dtos2.getId()값을 받아옴
+	
+	public BusinessMenu(String bid) { //Customer에서 dtos2.getId()값을 받아옴
+		BusinessDTO business = (BusinessDTO)Session.getSession("business");
 		
 		pane = new JPanel();
 		pane.setLayout(null);
@@ -46,7 +48,17 @@ public class Menu extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				new Customer();
+				new Business();
+			}
+		});
+		
+		JButton btnAddMenu = new JButton("메뉴 추가");
+		btnAddMenu.setBounds(830, 10, 100, 50);
+		btnAddMenu.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				new AddMenu();
 			}
 		});
 		
@@ -58,12 +70,14 @@ public class Menu extends JFrame{
 		setResizable(false);
 		
 		
+		
+		
 		MenuDAO dao = new MenuDAO();
 		ArrayList<MenuDTO> dtos = new ArrayList<MenuDTO>();
 		
 		dtos = dao.selectAllMenu(bid);
 		
-		for(int i = 0; i < dtos.size(); i++) { 
+		for(int i = 0; i < dtos.size(); i++) {
 			MenuDTO menu = dtos.get(i);				
 			
 			String menuName = menu.getMenuname();
@@ -74,40 +88,15 @@ public class Menu extends JFrame{
 			JLabel price = new JLabel(Integer.toString(menu.getMenuprice()) + "원");
 			price.setBounds(posX+200, posY + (i * 50), 300, 50);
 			price.setFont(font);
-			JButton btnTake = new JButton("담기");
-			btnTake.setBounds(posX+500, posY + (i*50), 100, 50);
-			btnTake.setFont(font2);
 			
-			btnTake.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					if(dao.isAnotherBusinessInBasket(member.getId(), bid) == true) {
-						JOptionPane.showMessageDialog(null, "다른 가게 메뉴가 존재합니다.");
-					}
-					else if(dao.SameMenu(member.getId(), bid, menu.getMenuname()) == true){
-						JOptionPane.showMessageDialog(null, "같은 메뉴가 장바구니에 존재합니다.");
-					}
-					else {
-					setVisible(false);
-					MenuDAO dao = new MenuDAO();
-					BaguniDTO dto = new BaguniDTO();
-					dto.setMenu_no(menu.getMenu_no());
-					dto.setM_id(member.getId());
-					dao.insertBaguni(dto);
-					setVisible(true);
-					JOptionPane.showMessageDialog(null, "장바구니에 담았습니다.", "Success", JOptionPane.PLAIN_MESSAGE);
-					}
-				}
-			});
-			
-			pane.add(btnTake);
 			pane.add(lbl);
 			pane.add(price);
 			Dimension di = pane.getPreferredSize();
 			di.height += 60;
 			pane.setPreferredSize(di);
 		}	
-			
+		
+		add(btnAddMenu);
 		add(scroll);
 		add(btnBack);
 		setVisible(true);

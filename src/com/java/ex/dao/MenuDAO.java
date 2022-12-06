@@ -301,6 +301,38 @@ public class MenuDAO extends DBConnection {
 		return false;
 	}
 	
+	public boolean SameAddMenu(String b_id,String menuname) {
+		query = "select exists(select * from menu where b_id = '" + b_id + "' and menuname = '" + menuname + "')";
+		
+		
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(query);
+			
+			while(rs.next()) {
+			int result = rs.getInt(1);
+			if(result == 1) {
+				return true;
+			} 
+			else if(result == 0){
+				return false;
+				}
+			}
+		}catch(SQLException ex) {
+			ex.printStackTrace();
+			
+			System.out.println("접속 실ㅇ패");
+		} finally {
+			try {
+				if (rs != null) rs.close();
+				if (stmt != null) stmt.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+	}
+	
 	
 	
 	/*
@@ -369,6 +401,30 @@ public class MenuDAO extends DBConnection {
 		return Order; 
 	}
 
-
+	public void insertMenu(MenuDTO dto) {
+		query = "insert into menu(b_id, menuname, menuprice, menupic) value(?,?,?,null)";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, dto.getB_id());
+			pstmt.setString(2, dto.getMenuname());
+			pstmt.setInt(3, dto.getMenuprice());
+			//pstmt.setString(4, dto.getMenupic());
+			
+			pstmt.executeUpdate();
+			System.out.println("담기 성공");
+			
+		} catch(SQLException ex) {
+			ex.printStackTrace();
+			System.out.println("접속 실패");
+		} finally {
+			try {
+				if (rs != null) rs.close();
+				if (pstmt != null) pstmt.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }
 	
