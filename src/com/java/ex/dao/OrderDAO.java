@@ -158,7 +158,7 @@ public class OrderDAO extends DBConnection {
 	}
 	
 	public  ArrayList<Map<String,Object>> OrderList(String m_id, String b_id) {
-		query = "select menuname, m_address, m_tel, o_datetime, o_state, (menuprice*menu_count) as menutotalprice, menu_count "
+		query = "select o_no, menuname, m_address, m_tel, o_datetime, o_state, (menuprice*menu_count) as menutotalprice, menu_count "
 			  + "from member m, menu me, `order` o  "
 			  + "WHERE m.m_id = o.m_id AND o.menu_no = me.menu_no and m.m_id = '" + m_id + "' AND me.b_id = '"+ b_id +"'";
 		ArrayList<Map<String,Object>> CustomerOrderList = new ArrayList<Map<String,Object>>();
@@ -167,7 +167,8 @@ public class OrderDAO extends DBConnection {
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(query);
 			
-			while(rs.next()) {		
+			while(rs.next()) {
+				int o_no = rs.getInt("o_no");
 				String menuname = rs.getString("menuname");	
 				String m_address = rs.getString("m_address");
 				String m_tel = rs.getString("m_tel");
@@ -177,6 +178,7 @@ public class OrderDAO extends DBConnection {
 				int menu_count = rs.getInt("menu_count");
 				
 				Map map = new HashMap<String, Object>();
+				map.put("o_no", o_no);
 				map.put("menuname", menuname);
 				map.put("m_address", m_address);
 				map.put("m_tel", m_tel);
@@ -199,6 +201,51 @@ public class OrderDAO extends DBConnection {
 			}
 		}
 		return CustomerOrderList; 
+	}
+	
+	public void OrderSelectDelete(String m_id, int o_no) {
+		query = "delete from `order` where m_id =? and o_no =?";
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, m_id);
+			pstmt.setInt(2, o_no);
+			pstmt.executeUpdate();
+			System.out.println("삭제 성공");
+		} catch(SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) rs.close();
+				if (pstmt != null) pstmt.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void StateUpdate(String m_id, String o_state, int o_no) {
+		//query = "update `Order` set o_state = '완료'  where m_id = '" + m_id + "' and o_no = '" + o_no + "'";
+		query = "update `Order` set o_state = '완료'  where m_id = ? and o_no = ?";
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, m_id);
+			//pstmt.setString(1, o_state);
+			System.out.println("성");
+			pstmt.setInt(2, o_no);
+			System.out.println("실");
+			pstmt.executeUpdate();
+			System.out.println("수정 성공");
+		} catch(SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) rs.close();
+				if (pstmt != null) pstmt.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 }
