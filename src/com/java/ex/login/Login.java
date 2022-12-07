@@ -20,6 +20,7 @@ import com.java.ex.dto.MemberDTO;
 //import com.java.management.Management;
 //import com.java.user.UserTestList;
 import com.java.ex.dto.Session;
+import com.java.ex.management.Management;
 
 public class Login extends JFrame {
 	
@@ -122,9 +123,9 @@ public class Login extends JFrame {
 				else if(dto.getAuthority()==2) {
 					// 관리자 창으로 넘어가기
 					setVisible(false);
-					//new Management(dto);
 					System.out.println("관리자");
-					Session.setSession("member", dto);
+					Session.setSession("manager", dto);
+					new Management();
 				}
 			}
 			else {

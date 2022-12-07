@@ -100,7 +100,7 @@ public class CustomerOrder extends JFrame {
 					if (complete == JOptionPane.YES_OPTION) {
 						odao.StateUpdate(m_id, state, o_no);
 						lbl.setText("주문한 메뉴 : " + menuname + " " + "주소 : " + address + " " + "전화번호 : " + tel + " " + "주문 날짜 : "
-								+ odatetime + " " + "배달 상태 : 완료" + state + " " + "수량 : " + count + " " + "가격 : " + price + "원");
+								+ odatetime + " " + "배달 상태 : 완료" + " " + "수량 : " + count + " " + "가격 : " + price + "원");
 						
 					}
 				}

@@ -253,12 +253,12 @@ public class Baguni extends JFrame {
 							menu = mdao.selectMenu(baguni.getMenu_no());
 							
 							Date date = new Date(utilDate.getTime());
-							SimpleDateFormat today = new SimpleDateFormat("yyyy/MM/dd");
+							
 							
 							
 							dto.setB_id(menu.getB_id());
 							dto.setO_datetime(date);
-							//dto.setO_state((String) hashmap.get("o_state"));
+							dto.setO_state("¹Ì¿Ï·á");
 							dto.setM_id(baguni.getM_id());
 							dto.setMenu_no(baguni.getMenu_no());
 							dto.setMenu_count(baguni.getMenu_count());

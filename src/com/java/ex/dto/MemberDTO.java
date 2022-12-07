@@ -20,7 +20,7 @@ public class MemberDTO {
 		tel = "";
 		nickn = "";
 		reg_date = null;
-		authority = 2;
+		authority = 0;
 	}
 	
 	

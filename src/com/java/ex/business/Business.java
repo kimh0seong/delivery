@@ -97,7 +97,6 @@ public class Business extends JFrame {
 		ArrayList<OrderDTO> dtos = new ArrayList<OrderDTO>();
 		
 		//주문 리스트 불러오기
-		System.out.println(business.getId());
 		dtos = dao.selectAllOrder(business.getId());
 		
 		for(int i = 0; i < dtos.size(); i++) {

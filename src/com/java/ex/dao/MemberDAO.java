@@ -91,13 +91,14 @@ public class MemberDAO extends DBConnection {
 				String tel = rs.getString("m_tel");
 				String nickn = rs.getString("m_nickn");
 				Date reg_date = rs.getDate("m_reg_date");
-				int authority = rs.getInt("authority");
+				int authority = rs.getInt("m_authority");
 				
 				MemberDTO dto = new MemberDTO(id, pw, name, address, tel, nickn, reg_date, authority);
 				dtos.add(dto);
 			}
 		} catch(SQLException ex) {
-			System.out.println("立加 角菩");
+			ex.printStackTrace();
+			System.out.println("立加 dd角菩");
 		} finally {
 			try {
 				if (rs != null) rs.close();

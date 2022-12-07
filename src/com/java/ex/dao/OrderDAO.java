@@ -248,4 +248,163 @@ public class OrderDAO extends DBConnection {
 		}
 	}
 	
+	public  ArrayList<Map<String,Object>> CustomerOrderList(String b_id) {
+		query = "select menuname, sum(menu_count) as salecnt, sum(menuprice*menu_count) as menutotalprice "
+				  + "from menu m, `order` o  "
+				  + "WHERE o.b_id = '" + b_id + "' and o.menu_no = m.menu_no group by menuname";
+				 
+		ArrayList<Map<String,Object>> OrderList = new ArrayList<Map<String,Object>>();
+		
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(query);
+			
+			while(rs.next()) {		
+				String menuname = rs.getString("menuname");
+				int menu_count = rs.getInt("salecnt");
+				int menuprice = rs.getInt("menutotalprice");
+				
+								
+				Map map = new HashMap<String, Object>();
+				map.put("menuname", menuname);
+				map.put("salecnt", menu_count);
+				map.put("menutotalprice", menuprice);
+				
+				OrderList.add(map);
+				System.out.println("성공");
+			}
+		} catch(SQLException ex) {
+			ex.printStackTrace();
+			System.out.println("실패");
+		} finally {
+			try {
+				if (rs != null) rs.close();
+				if (stmt != null) stmt.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return OrderList; 
+	}
+	
+	public  ArrayList<Map<String,Object>> CustomerOrderdateList(String b_id) {
+		query = "select o_datetime, menuname, sum(menu_count) as salecnt, sum(menuprice*menu_count) as menutotalprice "
+				  + "from menu m, `order` o  "
+				  + "WHERE o.b_id = '" + b_id + "' and o.menu_no = m.menu_no AND o_datetime BETWEEN '19990120' AND NOW() group by menuname, o_datetime";
+				 
+		ArrayList<Map<String,Object>> OrderList = new ArrayList<Map<String,Object>>();
+		
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(query);
+			
+			while(rs.next()) {	
+				Date o_datetime = rs.getDate("o_datetime");
+				String menuname = rs.getString("menuname");
+				int menu_count = rs.getInt("salecnt");
+				int menuprice = rs.getInt("menutotalprice");			
+								
+				Map map = new HashMap<String, Object>();
+				map.put("o_datetime", o_datetime);
+				map.put("menuname", menuname);
+				map.put("salecnt", menu_count);
+				map.put("menutotalprice", menuprice);
+				
+				OrderList.add(map);
+				System.out.println("성공");
+			}
+		} catch(SQLException ex) {
+			ex.printStackTrace();
+			System.out.println("실패");
+		} finally {
+			try {
+				if (rs != null) rs.close();
+				if (stmt != null) stmt.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return OrderList; 
+	}
+	
+	
+	public  ArrayList<Map<String,Object>> TodayOrderdateList(String b_id) {
+		query = "select o_datetime, menuname, sum(menu_count) as salecnt, sum(menuprice*menu_count) as menutotalprice "
+				  + "from menu m, `order` o  "
+				  + "WHERE o.b_id = '" + b_id + "' and o.menu_no = m.menu_no AND o_datetime = date_format(NOW(), '%Y-%m-%d') group by menuname, o_datetime";
+				 
+		ArrayList<Map<String,Object>> OrderList = new ArrayList<Map<String,Object>>();
+		
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(query);
+			
+			while(rs.next()) {	
+				Date o_datetime = rs.getDate("o_datetime");
+				String menuname = rs.getString("menuname");
+				int menu_count = rs.getInt("salecnt");
+				int menuprice = rs.getInt("menutotalprice");			
+								
+				Map map = new HashMap<String, Object>();
+				map.put("o_datetime", o_datetime);
+				map.put("menuname", menuname);
+				map.put("salecnt", menu_count);
+				map.put("menutotalprice", menuprice);
+				
+				OrderList.add(map);
+				System.out.println("성공");
+			}
+		} catch(SQLException ex) {
+			ex.printStackTrace();
+			System.out.println("실패");
+		} finally {
+			try {
+				if (rs != null) rs.close();
+				if (stmt != null) stmt.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return OrderList; 
+	}
+	
+	public  ArrayList<Map<String,Object>> recentOrder(String mid) {
+		query = "select o.o_datetime, o.m_id, o.b_id, menuname, (menuprice*menu_count) as menutotalprice from `order` o, menu m where o.menu_no = m.menu_no and o.m_id = '" + mid + "' order by o.o_no DESC";
+				 
+		ArrayList<Map<String,Object>> OrderList = new ArrayList<Map<String,Object>>();
+		
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(query);
+			
+			while(rs.next()) {	
+				Date o_datetime = rs.getDate("o_datetime");
+				String m_id = rs.getString("m_id");
+				String b_id = rs.getString("b_id");
+				String menuname = rs.getString("menuname");
+				int menuprice = rs.getInt("menutotalprice");			
+								
+				Map map = new HashMap<String, Object>();
+				map.put("o_datetime", o_datetime);
+				map.put("m_id", m_id);
+				map.put("b_id", b_id);
+				map.put("menuname", menuname);
+				map.put("menutotalprice", menuprice);
+				
+				OrderList.add(map);
+				System.out.println("성공");
+			}
+		} catch(SQLException ex) {
+			ex.printStackTrace();
+			System.out.println("실패");
+		} finally {
+			try {
+				if (rs != null) rs.close();
+				if (stmt != null) stmt.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return OrderList; 
+	}
 }
