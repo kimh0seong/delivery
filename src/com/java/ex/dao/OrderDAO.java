@@ -12,7 +12,9 @@ import com.java.ex.dto.OrderDTO;
 public class OrderDAO extends DBConnection {
 
 	public  ArrayList<Map<String,Object>> selectOrder(String id) {
-		query = "select b_name, menuname, menuprice, o_datetime, o_state from business b, menu m, `order` o where b.b_id = m.b_id and m.b_id = o.b_id and o.m_id='" +id + "'";
+		query = "select b_name, menuname, menuprice, o_datetime, o_state, o.menu_count "
+                + "from business b, menu m, `order` o "
+                + "where o.menu_no = m.menu_no AND o.b_id = b.b_id AND o.m_id='" +id + "'";
 		ArrayList<Map<String,Object>> OrderList = new ArrayList<Map<String,Object>>();
 		
 		try {
@@ -26,18 +28,20 @@ public class OrderDAO extends DBConnection {
 				int menuprice = rs.getInt("menuprice");
 				Date o_datetime = rs.getDate("o_datetime");
 				String o_state = rs.getString("o_state");
+				int menu_count = rs.getInt("menu_count");
 								
 				Map map = new HashMap<String, Object>();
 				
 				map.put("businessname",b_name);
 				map.put("menuname",menuname);
-				map.put("menuprice",menuprice);
-				
+				map.put("menuprice",menuprice);			
 				map.put("datetime",o_datetime);
 				map.put("state",o_state);
+				map.put("menu_count",menu_count);
 				OrderList.add(map);
 			}
 		} catch(SQLException ex) {
+			ex.printStackTrace();
 			System.out.println("접속 패");
 		} finally {
 			try {
@@ -369,7 +373,7 @@ public class OrderDAO extends DBConnection {
 	}
 	
 	public  ArrayList<Map<String,Object>> recentOrder(String mid) {
-		query = "select o.o_datetime, o.m_id, o.b_id, menuname, (menuprice*menu_count) as menutotalprice from `order` o, menu m where o.menu_no = m.menu_no and o.m_id = '" + mid + "' order by o.o_no DESC";
+		query = "select o.o_datetime, o.m_id, b.b_name, menuname, (menuprice*menu_count) as menutotalprice from `order` o, menu m, business b where b.b_id = m.b_id and o.menu_no = m.menu_no and o.m_id = '" + mid + "' order by o.o_no DESC";
 				 
 		ArrayList<Map<String,Object>> OrderList = new ArrayList<Map<String,Object>>();
 		
@@ -380,20 +384,19 @@ public class OrderDAO extends DBConnection {
 			while(rs.next()) {	
 				Date o_datetime = rs.getDate("o_datetime");
 				String m_id = rs.getString("m_id");
-				String b_id = rs.getString("b_id");
+				String b_name = rs.getString("b_name");
 				String menuname = rs.getString("menuname");
 				int menuprice = rs.getInt("menutotalprice");
-				
-								
+							
 				Map map = new HashMap<String, Object>();
 				map.put("o_datetime", o_datetime);
 				map.put("m_id", m_id);
-				map.put("b_id", b_id);
+				map.put("b_name", b_name);
 				map.put("menuname", menuname);
 				map.put("menutotalprice", menuprice);
 				
 				OrderList.add(map);
-				System.out.println("성공");
+				
 			}
 		} catch(SQLException ex) {
 			ex.printStackTrace();

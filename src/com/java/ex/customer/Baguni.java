@@ -231,6 +231,10 @@ public class Baguni extends JFrame {
 						setVisible(true);
 						}
 					
+					Dimension di = pane.getPreferredSize();
+					di.height += 60;
+					pane.setPreferredSize(di);
+					
 					
 					
 					BaguniDAO dao = new BaguniDAO();

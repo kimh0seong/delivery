@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -101,47 +102,32 @@ public class UserRecord extends JFrame{
 			lblrecentOrder.setBounds(posX+70, posY + (i * 60), 300, 50);
 			lblrecentOrder.setFont(font20);
 			
-			System.out.println(id);
+			String bname = (String) hashmap.get("b_name");
 			
-			String bid = (String) hashmap.get("b_id");
-			JLabel lblBid = new JLabel(bid);
-			
-			lblBid.setBounds(posX+220, posY + (i * 60), 300, 50);
-			lblBid.setFont(font20);
-			
-			System.out.println(bid);
+			JLabel lblBname = new JLabel(bname);			
+			lblBname.setBounds(posX+220, posY + (i * 60), 300, 50);
+			lblBname.setFont(font20);
 			
 			String menuName = (String) hashmap.get("menuname");
 			JLabel lblMenuname = new JLabel(menuName);
 			lblMenuname.setBounds(posX+470, posY + (i * 60), 300, 50);
 			lblMenuname.setFont(font20);
 			
-			System.out.println(menuName);
 			
-			int price = (int) hashmap.get("menuprice");
-			JLabel lblPrice = new JLabel(Integer.toString((int)hashmap.get("menutotalprice")));
-			lblPrice.setBounds(posX+470, posY + (i * 60), 300, 50);
+			JLabel lblPrice = new JLabel(Integer.toString((int)hashmap.get("menutotalprice")) + "원");
+			lblPrice.setBounds(posX+720, posY + (i * 60), 300, 50);
 			lblPrice.setFont(font20);
 			
-			System.out.println(price);
-			
-			JButton btnTestRecordOpen = new JButton("시험지 보기");
-			btnTestRecordOpen.setBounds(posX + 650, posY + (i * 60), 150, 50);
-			btnTestRecordOpen.setFont(font20);
-			btnTestRecordOpen.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					setVisible(false);
-					//new UserTestReview(memberDTO, member_id, dtos.get(_i).getTest_id(), dtos.get(_i).getTest_num());
-				}
-			});
+			Date odatetime = (Date) hashmap.get("o_datetime");
+			JLabel lblOdatetime = new JLabel(odatetime.toString());
+			lblOdatetime.setBounds(posX+970, posY + (i * 60), 300, 50);
+			lblOdatetime.setFont(font20);
 			
 			pane.add(lblrecentOrder);
-			pane.add(lblBid);
+			pane.add(lblBname);
 			pane.add(lblMenuname);
 			pane.add(lblPrice);
-			pane.add(btnTestRecordOpen);
-			setVisible(true);
+			pane.add(lblOdatetime);
 			
 			Dimension di = pane.getPreferredSize();
 			di.height += 60;
@@ -153,6 +139,7 @@ public class UserRecord extends JFrame{
 		add(_lblMenu);
 		add(_lblPay);
 		add(_lblDate);
+		
 		add(scroll);
 		setVisible(true);
 	}

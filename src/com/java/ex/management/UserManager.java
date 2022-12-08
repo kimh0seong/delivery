@@ -127,7 +127,7 @@ public class UserManager extends JFrame{
 				lblRegdate2.setFont(font);
 				
 				
-				JButton btnModify = new JButton("세부 정보 확인");
+				JButton btnModify = new JButton("최근 주문");
 				btnModify.setBounds(posX + 1240, posY + 10 + (cnt * 60), 130, 50);
 				btnModify.addActionListener(new ActionListener() {
 					@Override

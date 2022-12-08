@@ -71,7 +71,8 @@ public class OrderList extends JFrame{
 	     
 	    for(int i=0; i<OrderList.size(); i++) {
 	    	HashMap<String, Object> hashmap = (HashMap<String, Object>) OrderList.get(i);
-	    	JLabel lblOrder = new JLabel("가게명 : " + hashmap.get("businessname") + "  " + "메뉴이름 : " + hashmap.get("menuname") + "  " + "가격 : " + hashmap.get("menuprice") + "  " + "주문 날짜 : " + hashmap.get("datetime") + "  " + "배달 상태 : " + hashmap.get("state"));
+	    	int price =  (int)hashmap.get("menuprice") * (int)hashmap.get("menu_count");
+	    	JLabel lblOrder = new JLabel("가게명 : " + hashmap.get("businessname") + "  " + "메뉴이름 : " + hashmap.get("menuname") + "  " + "총 가격 : " + price + "원" + " " + "주문 날짜 : " + hashmap.get("datetime") + "  " + "배달 상태 : " + hashmap.get("state"));
 	    	lblOrder.setBounds(posX, posY + (i * 50), 800, 50);
 			lblOrder.setFont(font3);
 	    	pane.add(lblOrder);
