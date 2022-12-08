@@ -96,6 +96,8 @@ public class UserManager extends JFrame{
 			if(dtos.get(i).getAuthority() == 1) {
 				String m_id = dtos.get(i).getId();
 				
+				System.out.println(m_id);
+				
 				JLabel lblID2 = new JLabel(dtos.get(i).getId());
 				lblID2.setBounds(posX + 40, posY + 10 + (cnt * 60), 150, 50);
 				lblID2.setFont(font);
@@ -131,7 +133,7 @@ public class UserManager extends JFrame{
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						setVisible(false);
-						new UserRecord(manager, m_id);
+						new UserRecord(m_id);
 					}
 				});
 				

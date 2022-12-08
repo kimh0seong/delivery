@@ -36,7 +36,7 @@ public class UserRecord extends JFrame{
 	JPanel pane;
 	JScrollPane scroll;
 	
-	public UserRecord(MemberDTO memberDTO, String m_id) {
+	public UserRecord(String m_id) {
 		MemberDTO manager = (MemberDTO)Session.getSession("manager");
 		pane = new JPanel();
 		pane.setLayout(null);
@@ -61,7 +61,7 @@ public class UserRecord extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				if(memberDTO.getAuthority()==2)
+				if(manager.getAuthority()==2)
 					new UserManager();
 				else
 					new Customer();
@@ -98,7 +98,7 @@ public class UserRecord extends JFrame{
 			String id = (String) hashmap.get("m_id");
 			JLabel lblrecentOrder = new JLabel(id);
 			//lblrecentOrder.setText(memberDTO.getId());
-			lblrecentOrder.setBounds(posX+70, posY + 200 + (i * 60), 300, 50);
+			lblrecentOrder.setBounds(posX+70, posY + (i * 60), 300, 50);
 			lblrecentOrder.setFont(font20);
 			
 			System.out.println(id);
@@ -119,7 +119,7 @@ public class UserRecord extends JFrame{
 			System.out.println(menuName);
 			
 			int price = (int) hashmap.get("menuprice");
-			JLabel lblPrice = new JLabel((String) hashmap.get("menuprice"));
+			JLabel lblPrice = new JLabel(Integer.toString((int)hashmap.get("menutotalprice")));
 			lblPrice.setBounds(posX+470, posY + (i * 60), 300, 50);
 			lblPrice.setFont(font20);
 			

@@ -382,7 +382,8 @@ public class OrderDAO extends DBConnection {
 				String m_id = rs.getString("m_id");
 				String b_id = rs.getString("b_id");
 				String menuname = rs.getString("menuname");
-				int menuprice = rs.getInt("menutotalprice");			
+				int menuprice = rs.getInt("menutotalprice");
+				
 								
 				Map map = new HashMap<String, Object>();
 				map.put("o_datetime", o_datetime);
