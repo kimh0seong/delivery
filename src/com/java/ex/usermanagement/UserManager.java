@@ -130,31 +130,37 @@ public class UserManager extends JFrame {
 				JLabel lblID2 = new JLabel(dtos.get(i).getId());
 				lblID2.setBounds(posX + 40, posY + 10 + (cnt * 60), 150, 50);
 				lblID2.setFont(font2);
+				lblIDList.add(lblID2);
 				
 				JLabel lblName2 = new JLabel(dtos.get(i).getName());
 				lblName2.setBounds(posX + 240, posY + 10 + (cnt * 60), 150, 50);
 				lblName2.setFont(font2);
+				lblNameList.add(lblName2);
 				
 				JLabel lblAddress2 = new JLabel(dtos.get(i).getAddress());
 				lblAddress2.setBounds(posX + 340, posY + 10 + (cnt * 60), 300, 50);
 				lblAddress2.setFont(font2);
+				lblAddressList.add(lblAddress2);
 				
 				JLabel lblTel2 = new JLabel(dtos.get(i).getTel());
 				lblTel2.setBounds(posX + 640, posY + 10 + (cnt * 60), 300, 50);
 				lblTel2.setFont(font2);
+				lblTelList.add(lblTel2);
 				
 				JLabel lblNickn2 = new JLabel(dtos.get(i).getNickn());
 				lblNickn2.setBounds(posX + 840, posY + 10 + (cnt * 60), 300, 50);
 				lblNickn2.setFont(font2);
+				lblNicknList.add(lblNickn2);
 				
 				JLabel lblRegdate2 = new JLabel(date.toString());
 				lblRegdate2.setBounds(posX + 1040, posY + 10 + (cnt * 60), 300, 50);
 				lblRegdate2.setFont(font2);
-				
+				lblRegdateList.add(lblRegdate2);
 				
 				JButton btnRecentOrder = new JButton("최근 주문");
 				btnRecentOrder.setBounds(posX + 1200, posY + 10 + (cnt * 60), 130, 50);
 				btnRecentOrder.setFont(font3);
+				btnRecentOrderList.add(btnRecentOrder);
 				btnRecentOrder.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -168,6 +174,7 @@ public class UserManager extends JFrame {
 				JButton btnDeletemember = new JButton("고객 삭제");
 				btnDeletemember.setBounds(posX + 1340, posY + 10 + (cnt * 60), 130, 50);
 				btnDeletemember.setFont(font3);
+				btnDeleteList.add(btnDeletemember);
 				btnDeletemember.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {

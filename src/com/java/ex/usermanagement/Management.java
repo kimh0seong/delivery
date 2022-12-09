@@ -16,7 +16,6 @@ import com.java.ex.login.Login;
 public class Management extends JFrame{
 	JButton btnUserMng, btnTestMng, btnLogout;
 	Font font = new Font("µ¸¿ò", Font.BOLD, 30);
-	
 	public Management() {
 		MemberDTO manager = (MemberDTO)Session.getSession("manager");
 		setTitle("°ü¸®ÀÚ");
@@ -67,6 +66,7 @@ public class Management extends JFrame{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			setVisible(false);
+			
 			new BusinessManager();
 		}
 	}
