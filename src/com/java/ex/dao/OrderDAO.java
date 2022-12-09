@@ -372,8 +372,8 @@ public class OrderDAO extends DBConnection {
 		return OrderList; 
 	}
 	
-	public  ArrayList<Map<String,Object>> recentOrder(String mid) {
-		query = "select o.o_datetime, o.m_id, b.b_name, menuname, menu_count, (menuprice*menu_count) as menutotalprice from `order` o, menu m, business b where b.b_id = m.b_id and o.menu_no = m.menu_no and o.m_id = '" + mid + "' order by o.o_no DESC";
+	public  ArrayList<Map<String,Object>> recentOrder(String bid) {
+		query = "select o.o_datetime, o.m_id, b.b_name, menuname, menu_count, (menuprice*menu_count) as menutotalprice from `order` o, menu m, business b where b.b_id = m.b_id and o.menu_no = m.menu_no and o.m_id = '" + bid + "' order by o.o_no DESC";
 				 
 		ArrayList<Map<String,Object>> OrderList = new ArrayList<Map<String,Object>>();
 		

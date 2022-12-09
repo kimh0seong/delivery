@@ -1,6 +1,6 @@
 package com.java.ex.businessmanagerment;
 
-import java.awt.Color;
+import java.awt.Color; 
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
@@ -21,12 +21,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import com.java.ex.dao.BusinessDAO;
-import com.java.ex.dao.MemberDAO;
 import com.java.ex.dto.BusinessDTO;
 import com.java.ex.dto.MemberDTO;
 import com.java.ex.dto.Session;
-import com.java.ex.login.Login;
-import com.java.ex.login.SignUp;
 import com.java.ex.usermanagement.Management;
 
 public class BusinessManager extends JFrame {
@@ -86,11 +83,11 @@ public class BusinessManager extends JFrame {
 		lblID.setFont(font2);
 		
 		JLabel lblName = new JLabel("업체명");
-		lblName.setBounds(posX + 320, posY+20, 150, 50);
+		lblName.setBounds(posX + 280, posY+20, 150, 50);
 		lblName.setFont(font2);
 		
 		JLabel lblAddress = new JLabel("주소");
-		lblAddress.setBounds(posX + 420, posY+20, 300, 50);
+		lblAddress.setBounds(posX + 500, posY+20, 300, 50);
 		lblAddress.setFont(font2);
 		
 		JLabel lblTel = new JLabel("전화번호");
@@ -129,12 +126,12 @@ public class BusinessManager extends JFrame {
 				lblIDList.add(lblID2);
 				
 				JLabel lblName2 = new JLabel(dtos.get(i).getName());
-				lblName2.setBounds(posX + 240, posY + 10 + (cnt * 60), 150, 50);
+				lblName2.setBounds(posX + 200, posY + 10 + (cnt * 60), 150, 50);
 				lblName2.setFont(font2);
 				lblNameList.add(lblName2);
 				
 				JLabel lblAddress2 = new JLabel(dtos.get(i).getAddress());
-				lblAddress2.setBounds(posX + 340, posY + 10 + (cnt * 60), 300, 50);
+				lblAddress2.setBounds(posX + 420, posY + 10 + (cnt * 60), 300, 50);
 				lblAddress2.setFont(font2);
 				lblAddressList.add(lblAddress2);
 				
@@ -144,7 +141,7 @@ public class BusinessManager extends JFrame {
 				lblTelList.add(lblTel2);
 				
 				JLabel lblRegdate2 = new JLabel(date.toString());
-				lblRegdate2.setBounds(posX + 1040, posY + 10 + (cnt * 60), 300, 50);
+				lblRegdate2.setBounds(posX + 880, posY + 10 + (cnt * 60), 300, 50);
 				lblRegdate2.setFont(font2);
 				lblRegdateList.add(lblRegdate2);
 				
@@ -156,11 +153,11 @@ public class BusinessManager extends JFrame {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						setVisible(false);
-						//new UserRecord(m_id);
+						new BusinessRecord(b_id);
 					}
 				});
 				
-				MemberDAO deletedao = new MemberDAO();
+				BusinessDAO deletedao = new BusinessDAO();
 				
 				JButton btnDeletemember = new JButton("업체 삭제");
 				btnDeletemember.setBounds(posX + 1340, posY + 10 + (cnt * 60), 130, 50);
@@ -169,10 +166,10 @@ public class BusinessManager extends JFrame {
 				btnDeletemember.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						int delete = JOptionPane.showConfirmDialog(null, "고객을 삭제 하시겠습니까?", "고객 삭제",
+						int delete = JOptionPane.showConfirmDialog(null, "업체를 삭제 하시겠습니까?", "고객 삭제",
 								JOptionPane.YES_NO_OPTION);
 						if (delete == JOptionPane.YES_OPTION) {
-							deletedao.mDelete(b_id);
+							deletedao.bDelete(b_id);
 							lblID2.setVisible(false);
 							lblName2.setVisible(false);
 							lblAddress2.setVisible(false);
@@ -248,7 +245,7 @@ public class BusinessManager extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				//new AddCustomer();
+				new AddBusiness();
 			}
 			});
 				

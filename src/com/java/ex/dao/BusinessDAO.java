@@ -75,8 +75,8 @@ public class BusinessDAO extends DBConnection {
 		return dtos; 
 	}
 	
-	public void mDelete(MemberDTO dto) {
-		query = "delete from business where b_id='" + dto.getId() + "'";
+	public void bDelete(String b_id) {
+		query = "delete from business where b_id='" + b_id + "'";
 		
 		try {
 			stmt = con.createStatement();
