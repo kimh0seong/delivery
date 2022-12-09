@@ -112,8 +112,8 @@ public class MemberDAO extends DBConnection {
 	
 	
 	
-	public void mDelete(MemberDTO dto) {
-		query = "delete from member where id='" + dto.getId() + "'";
+	public void mDelete(String m_id) {
+		query = "delete from member where m_id='" + m_id + "'";
 		
 		try {
 			stmt = con.createStatement();

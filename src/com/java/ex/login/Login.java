@@ -20,7 +20,7 @@ import com.java.ex.dto.MemberDTO;
 //import com.java.management.Management;
 //import com.java.user.UserTestList;
 import com.java.ex.dto.Session;
-import com.java.ex.management.Management;
+import com.java.ex.usermanagement.Management;
 
 public class Login extends JFrame {
 	

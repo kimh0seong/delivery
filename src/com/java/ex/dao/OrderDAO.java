@@ -373,7 +373,7 @@ public class OrderDAO extends DBConnection {
 	}
 	
 	public  ArrayList<Map<String,Object>> recentOrder(String mid) {
-		query = "select o.o_datetime, o.m_id, b.b_name, menuname, (menuprice*menu_count) as menutotalprice from `order` o, menu m, business b where b.b_id = m.b_id and o.menu_no = m.menu_no and o.m_id = '" + mid + "' order by o.o_no DESC";
+		query = "select o.o_datetime, o.m_id, b.b_name, menuname, menu_count, (menuprice*menu_count) as menutotalprice from `order` o, menu m, business b where b.b_id = m.b_id and o.menu_no = m.menu_no and o.m_id = '" + mid + "' order by o.o_no DESC";
 				 
 		ArrayList<Map<String,Object>> OrderList = new ArrayList<Map<String,Object>>();
 		
@@ -386,6 +386,7 @@ public class OrderDAO extends DBConnection {
 				String m_id = rs.getString("m_id");
 				String b_name = rs.getString("b_name");
 				String menuname = rs.getString("menuname");
+				int menu_count = rs.getInt("menu_count");
 				int menuprice = rs.getInt("menutotalprice");
 							
 				Map map = new HashMap<String, Object>();
@@ -393,6 +394,7 @@ public class OrderDAO extends DBConnection {
 				map.put("m_id", m_id);
 				map.put("b_name", b_name);
 				map.put("menuname", menuname);
+				map.put("menu_count", menu_count);
 				map.put("menutotalprice", menuprice);
 				
 				OrderList.add(map);

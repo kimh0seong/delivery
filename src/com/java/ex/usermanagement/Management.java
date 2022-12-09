@@ -1,4 +1,4 @@
-package com.java.ex.management;
+package com.java.ex.usermanagement;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -7,11 +7,11 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import com.java.ex.businessmanagerment.BusinessManager;
 import com.java.ex.dto.MemberDTO;
 import com.java.ex.dto.Session;
 import com.java.ex.login.Login;
-//import com.java.management.test.TestMng;
-//import com.java.management.user.UserMng;
+
 
 public class Management extends JFrame{
 	JButton btnUserMng, btnTestMng, btnLogout;

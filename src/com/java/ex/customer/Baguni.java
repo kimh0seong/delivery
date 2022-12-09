@@ -142,7 +142,7 @@ public class Baguni extends JFrame {
 			btnDelete.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					int clear = JOptionPane.showConfirmDialog(null, "주문을 취소하시겠습니까?", "주문 취소",
+					int clear = JOptionPane.showConfirmDialog(null, "주문을 취소 하시겠습니까?", "주문 취소",
 							JOptionPane.YES_NO_OPTION);
 					if (clear == JOptionPane.YES_OPTION) {
 						dao.BaguniSelectDelete(member.getId(), sbno);

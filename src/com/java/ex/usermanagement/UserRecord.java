@@ -1,4 +1,4 @@
-package com.java.ex.management;
+package com.java.ex.usermanagement;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -81,12 +81,16 @@ public class UserRecord extends JFrame{
 		_lblMenu.setBounds(posX+550, posY, 300, 50);
 		_lblMenu.setFont(font20_bold);
 		
+		JLabel _lblCount = new JLabel("수량");
+		_lblCount.setBounds(posX+780, posY, 300, 50);
+		_lblCount.setFont(font20_bold);
+		
 		JLabel _lblPay = new JLabel("최근 결제 가격");
-		_lblPay.setBounds(posX+800, posY, 300, 50);
+		_lblPay.setBounds(posX+950, posY, 300, 50);
 		_lblPay.setFont(font20_bold);
 		
 		JLabel _lblDate = new JLabel("최근 주문 날짜");
-		_lblDate.setBounds(posX+1050, posY, 300, 50);
+		_lblDate.setBounds(posX+1190, posY, 300, 50);
 		_lblDate.setFont(font20_bold);
 		
 		
@@ -113,16 +117,22 @@ public class UserRecord extends JFrame{
 			lblMenuname.setBounds(posX+470, posY + (i * 60), 300, 50);
 			lblMenuname.setFont(font20);
 			
+			String menucount = Integer.toString((int) hashmap.get("menu_count"));
+			JLabel lblCount = new JLabel(menucount);
+			lblCount.setBounds(posX+720, posY + (i * 60), 300, 50);
+			lblCount.setFont(font20);
+			
 			
 			JLabel lblPrice = new JLabel(Integer.toString((int)hashmap.get("menutotalprice")) + "원");
-			lblPrice.setBounds(posX+720, posY + (i * 60), 300, 50);
+			lblPrice.setBounds(posX+890, posY + (i * 60), 300, 50);
 			lblPrice.setFont(font20);
 			
 			Date odatetime = (Date) hashmap.get("o_datetime");
 			JLabel lblOdatetime = new JLabel(odatetime.toString());
-			lblOdatetime.setBounds(posX+970, posY + (i * 60), 300, 50);
+			lblOdatetime.setBounds(posX+1120, posY + (i * 60), 300, 50);
 			lblOdatetime.setFont(font20);
 			
+			pane.add(lblCount);
 			pane.add(lblrecentOrder);
 			pane.add(lblBname);
 			pane.add(lblMenuname);
@@ -139,6 +149,7 @@ public class UserRecord extends JFrame{
 		add(_lblMenu);
 		add(_lblPay);
 		add(_lblDate);
+		add(_lblCount);
 		
 		add(scroll);
 		setVisible(true);
