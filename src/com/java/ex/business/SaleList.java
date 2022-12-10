@@ -77,6 +77,7 @@ public class SaleList extends JFrame {
 	    	lblOrder.setBounds(posX, posY + (i * 50), 800, 50);
 			lblOrder.setFont(font3);
 	    	pane.add(lblOrder);
+	    	
 	    	Dimension di = pane.getPreferredSize();
 			di.height += 60;
 			pane.setPreferredSize(di);
@@ -93,16 +94,18 @@ public class SaleList extends JFrame {
 				OrderDAO OrderDao = new OrderDAO();
 				ArrayList<Map<String, Object>> OrderList = new ArrayList<Map<String, Object>>();
 				OrderList = OrderDao.CustomerOrderList(business.getId());
+				titleOrder.setText("메뉴별 매출");
 				for(int i=0; i<OrderList.size(); i++) {
 			    	HashMap<String, Object> hashmap = (HashMap<String, Object>) OrderList.get(i);
 			    	JLabel lblOrder = new JLabel("메뉴 : " + hashmap.get("menuname") + "  " + "판매 갯수 : " + hashmap.get("salecnt") + "  " + "판매 가격 : " + hashmap.get("menutotalprice") + "원");
 			    	lblOrder.setBounds(posX, posY + (i * 50), 800, 50);
 					lblOrder.setFont(font3);
 			    	pane.add(lblOrder);
-			    	Dimension di = pane.getPreferredSize();
-					di.height += 60;
-					pane.setPreferredSize(di);
+			    
 			    }
+				Dimension di = pane.getPreferredSize();
+				di.height += 60;
+				pane.setPreferredSize(di);
 			}
 		});	
 		
@@ -118,18 +121,24 @@ public class SaleList extends JFrame {
 				OrderDAO OrderDao = new OrderDAO();
 				ArrayList<Map<String, Object>> OrderList = new ArrayList<Map<String, Object>>();
 				OrderList = OrderDao.CustomerOrderdateList(business.getId());
+				titleOrder.setText("날짜별 매출");
 				for(int i=0; i<OrderList.size(); i++) {
 			    	HashMap<String, Object> hashmap = (HashMap<String, Object>) OrderList.get(i);
 			    	JLabel lblOrder = new JLabel("날짜 : " + hashmap.get("o_datetime") + " " + "메뉴 : " + hashmap.get("menuname") + "  " + "판매 갯수 : " + hashmap.get("salecnt") + "  " + "판매 가격 : " + hashmap.get("menutotalprice") + "원");
 			    	lblOrder.setBounds(posX, posY + (i * 50), 800, 50);
 					lblOrder.setFont(font3);
 			    	pane.add(lblOrder);
+			    	
 			    	Dimension di = pane.getPreferredSize();
 					di.height += 60;
 					pane.setPreferredSize(di);
 			    }
 			}
+			
 		});	
+		Dimension di = pane.getPreferredSize();
+		di.height += 60;
+		pane.setPreferredSize(di);
 		
 		
 		

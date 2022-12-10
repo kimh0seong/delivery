@@ -294,7 +294,7 @@ public class OrderDAO extends DBConnection {
 	public  ArrayList<Map<String,Object>> CustomerOrderdateList(String b_id) {
 		query = "select o_datetime, menuname, sum(menu_count) as salecnt, sum(menuprice*menu_count) as menutotalprice "
 				  + "from menu m, `order` o  "
-				  + "WHERE o.b_id = '" + b_id + "' and o.menu_no = m.menu_no AND o_datetime BETWEEN '19990120' AND NOW() group by menuname, o_datetime";
+				  + "WHERE o.b_id = '" + b_id + "' and o.menu_no = m.menu_no AND o_datetime BETWEEN '19990120' AND NOW() group by menuname, o_datetime order by o_datetime desc";
 				 
 		ArrayList<Map<String,Object>> OrderList = new ArrayList<Map<String,Object>>();
 		
@@ -315,7 +315,7 @@ public class OrderDAO extends DBConnection {
 				map.put("menutotalprice", menuprice);
 				
 				OrderList.add(map);
-				System.out.println("성공");
+				//System.out.println("성공");
 			}
 		} catch(SQLException ex) {
 			ex.printStackTrace();
@@ -373,7 +373,7 @@ public class OrderDAO extends DBConnection {
 	}
 	
 	public  ArrayList<Map<String,Object>> recentOrder(String mid) {
-		query = "select o.o_datetime, o.m_id, b.b_name, menuname, menu_count, (menuprice*menu_count) as menutotalprice from `order` o, menu m, business b where b.b_id = m.b_id and o.menu_no = m.menu_no and o.m_id = '" + mid + "' order by o.o_no DESC";
+		query = "select o.o_datetime, o.m_id, b.b_name, menuname, menu_count, (menuprice*menu_count) as menutotalprice from `order` o, menu m, business b where b.b_id = m.b_id and o.menu_no = m.menu_no and o.m_id = '" + mid + "' order by o.o_datetime DESC";
 				 
 		ArrayList<Map<String,Object>> OrderList = new ArrayList<Map<String,Object>>();
 		

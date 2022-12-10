@@ -96,13 +96,13 @@ public class Baguni extends JFrame {
 			int sbno = (int) hashmap.get("sb_no");
 
 			JButton btnDelete = new JButton("주문 취소");
-			btnDelete.setBounds(posX + 700, posY + (i * 60), 100, 30);
+			btnDelete.setBounds(posX + 700, posY + (i * 55), 100, 30);
 
 			JButton btnPlus = new JButton("+");
-			btnPlus.setBounds(posX + 600, posY + (i * 60), 45, 30);
+			btnPlus.setBounds(posX + 600, posY + (i * 55), 45, 30);
 
 			JButton btnMinus = new JButton("-");
-			btnMinus.setBounds(posX + 650, posY + (i * 60), 45, 30);
+			btnMinus.setBounds(posX + 650, posY + (i * 55), 45, 30);
 
 			btnPlus.addActionListener(new ActionListener() {
 				@Override
@@ -291,13 +291,13 @@ public class Baguni extends JFrame {
 						int sbno = (int) hashmap.get("sb_no");
 
 						JButton btnDelete = new JButton("주문 취소");
-						btnDelete.setBounds(posX + 700, posY + (i * 60), 100, 30);
+						btnDelete.setBounds(posX + 700, posY + (i * 40), 100, 30);
 
 						JButton btnPlus = new JButton("+");
-						btnPlus.setBounds(posX + 600, posY + (i * 60), 45, 30);
+						btnPlus.setBounds(posX + 600, posY + (i * 40), 45, 30);
 
 						JButton btnMinus = new JButton("-");
-						btnMinus.setBounds(posX + 650, posY + (i * 60), 45, 30);
+						btnMinus.setBounds(posX + 650, posY + (i * 40), 45, 30);
 
 						btnPlus.addActionListener(new ActionListener() {
 							@Override
@@ -339,7 +339,7 @@ public class Baguni extends JFrame {
 						btnDelete.addActionListener(new ActionListener() {
 							@Override
 							public void actionPerformed(ActionEvent e) {
-								int clear = JOptionPane.showConfirmDialog(null, "주문을 취소하시겠습니까?", "ㄷ 취소",
+								int clear = JOptionPane.showConfirmDialog(null, "주문을 취소하시겠습니까?", "주문 취소",
 										JOptionPane.YES_NO_OPTION);
 								if (clear == JOptionPane.YES_OPTION) {
 									dao.BaguniSelectDelete(member.getId(), sbno);
