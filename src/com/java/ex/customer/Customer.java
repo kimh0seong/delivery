@@ -82,9 +82,9 @@ public class Customer extends JFrame {
 					HashMap<String, Object> hashmap = (HashMap<String, Object>) BusinessName.get(i);
 					
 					String bid = (String) hashmap.get("b_id");
-					JLabel lblBname = new JLabel("가게명 : " + hashmap.get("bname"));
+					JLabel lblBname = new JLabel((String) hashmap.get("bname"));
 					lblBname.setBounds(posX, posY+(i*50), 300, 50);
-					lblBname.setFont(font2);
+					lblBname.setFont(font);
 					JButton btnBusiness = new JButton("보기");
 					btnBusiness.setBounds(posX+700, posY + (i*50), 100, 45);
 					btnBusiness.setFont(font2);
@@ -164,7 +164,7 @@ public class Customer extends JFrame {
 		
 		
 		JButton btnBaguni = new JButton("장바구니");
-		btnBaguni.setBounds(325, 400, 150, 100);
+		btnBaguni.setBounds(780, 400, 150, 100);
 		btnBaguni.setFont(font2);
 		btnBaguni.addActionListener(new ActionListener() {
 			@Override
@@ -174,6 +174,7 @@ public class Customer extends JFrame {
 			}
 		});
 		
+		/*
 		JButton btnOrderCancle = new JButton("주문취소");
 		btnOrderCancle.setBounds(530, 400, 150, 100);
 		btnOrderCancle.setFont(font2);
@@ -184,10 +185,11 @@ public class Customer extends JFrame {
 				//new Test(memberDTO, testId);
 			}
 		});
+		*/
 		
 		add(txtSearch);
 		add(btnSearch);
-		add(btnOrderCancle);
+		//add(btnOrderCancle);
 		add(btnBaguni);
 		add(btnUserInfoModify);
 		add(btnBack);

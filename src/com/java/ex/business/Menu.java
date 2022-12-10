@@ -82,10 +82,10 @@ public class Menu extends JFrame{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					if(dao.isAnotherBusinessInBasket(member.getId(), bid) == true) {
-						JOptionPane.showMessageDialog(null, "다른 가게 메뉴가 존재합니다.");
+						JOptionPane.showMessageDialog(null, "장바구니에는 같은 가게에 메뉴만 담을 수 있습니다.");
 					}
 					else if(dao.SameMenu(member.getId(), bid, menu.getMenuname()) == true){
-						JOptionPane.showMessageDialog(null, "같은 메뉴가 장바구니에 존재합니다.");
+						JOptionPane.showMessageDialog(null, "같은 메뉴가 장바구니에 있습니다.");
 					}
 					else {
 					setVisible(false);

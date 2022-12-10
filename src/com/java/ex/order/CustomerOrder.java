@@ -119,6 +119,7 @@ public class CustomerOrder extends JFrame {
 						odao.OrderSelectDelete(m_id, o_no);
 						lbl.setVisible(false);
 						btnDelete.setVisible(false);
+						btnState.setVisible(false);
 
 						int index = lblList.indexOf(lbl);
 

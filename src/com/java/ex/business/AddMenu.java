@@ -32,14 +32,6 @@ public class AddMenu extends JFrame {
 	public AddMenu() {
 		BusinessDTO business = (BusinessDTO) Session.getSession("business");
 		
-		pane = new JPanel();
-		pane.setLayout(null);
-		pane.setBackground(Color.white);
-		pane.setPreferredSize(new Dimension(20, 20));
-		
-		scroll = new JScrollPane(pane);
-		scroll.setBounds(80,80,850,300);
-		
 		setTitle("메뉴 추가");
 		setSize(400, 500);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -77,10 +69,11 @@ public class AddMenu extends JFrame {
 
 		dtos = dao.selectAllMenu(business.getId());
 
-		for (int i = 0; i < 1; i++) {
+		for (int i = 0; i < dtos.size(); i++) {
 			MenuDTO menu = dtos.get(i);
-
+		
 			String menuName = menu.getMenuname();
+		}
 			String name = txtMenuName.getText().trim();
 			String price = txtMenuPrice.getText().trim();
 
@@ -89,6 +82,7 @@ public class AddMenu extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					if (dao.SameAddMenu(business.getId(), name) == true) {
 						JOptionPane.showMessageDialog(null, "같은 메뉴가 존재합니다.");
+						
 					} else {
 						setVisible(false);
 						MenuDAO dao = new MenuDAO();
@@ -102,28 +96,22 @@ public class AddMenu extends JFrame {
 					}
 				}
 			});
-			
-			add(lblMenuName);
-			add(txtMenuName);
-			add(lblMenuPrice);
-			add(txtMenuPrice);
-			add(btnAddMenu);
-			add(btnBack);
-			
-			
-			
+					
 			//pane.add(lblMenuName);
 			//pane.add(txtMenuName);
 			//pane.add(lblMenuPrice);
 			//pane.add(txtMenuPrice);
 			//pane.add(btnAddMenu);
 			//pane.add(btnBack);
-			Dimension di = pane.getPreferredSize();
-			di.height += 60;
-			pane.setPreferredSize(di);
 			
-		}
-		//add(scroll);
+			
+		
+		add(lblMenuName);
+		add(txtMenuName);
+		add(lblMenuPrice);
+		add(txtMenuPrice);
+		add(btnAddMenu);
+		add(btnBack);
 		setVisible(true);
 	}
 

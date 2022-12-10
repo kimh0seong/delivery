@@ -228,7 +228,8 @@ public class Baguni extends JFrame {
 						lblPay.setFont(font2);
 						
 						lblPay.setText(
-								"메뉴 :" + " " + menuname + " " + "수량 :" + " " + menucount + " " + "가격 : " + menuprice + "원");						
+								"메뉴 :" + " " + menuname + " " + "수량 :" + " " + menucount + " " + "가격 : " + menuprice + "원");
+						lbl.setText("결제 목록");
 						pane.add(lblPay);
 						
 						setVisible(true);
@@ -338,7 +339,7 @@ public class Baguni extends JFrame {
 						btnDelete.addActionListener(new ActionListener() {
 							@Override
 							public void actionPerformed(ActionEvent e) {
-								int clear = JOptionPane.showConfirmDialog(null, "주문을 취소하시겠습니까?", "주문 취소",
+								int clear = JOptionPane.showConfirmDialog(null, "주문을 취소하시겠습니까?", "ㄷ 취소",
 										JOptionPane.YES_NO_OPTION);
 								if (clear == JOptionPane.YES_OPTION) {
 									dao.BaguniSelectDelete(member.getId(), sbno);
