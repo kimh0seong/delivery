@@ -65,44 +65,33 @@ public class AddMenu extends JFrame {
 		btnAddMenu.setBounds(80, 380, 100, 50);
 
 		MenuDAO dao = new MenuDAO();
-		ArrayList<MenuDTO> dtos = new ArrayList<MenuDTO>();
-
-		dtos = dao.selectAllMenu(business.getId());
-
-		for (int i = 0; i < dtos.size(); i++) {
-			MenuDTO menu = dtos.get(i);
 		
-			String menuName = menu.getMenuname();
-		}
-			String name = txtMenuName.getText().trim();
-			String price = txtMenuPrice.getText().trim();
-
-			btnAddMenu.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					if (dao.SameAddMenu(business.getId(), name) == true) {
-						JOptionPane.showMessageDialog(null, "같은 메뉴가 존재합니다.");
-						
-					} else {
-						setVisible(false);
-						MenuDAO dao = new MenuDAO();
-						MenuDTO dto = new MenuDTO();
-						dto.setB_id(business.getId());
-						dto.setMenuname(txtMenuName.getText().trim());
-						dto.setMenuprice(Integer.parseInt(txtMenuPrice.getText().trim()));
-						dao.insertMenu(dto);
-						setVisible(true);
-						JOptionPane.showMessageDialog(null, "메뉴를 추가하였습니다", "Success", JOptionPane.PLAIN_MESSAGE);
-					}
-				}
-			});
+		btnAddMenu.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (dao.SameAddMenu(business.getId(), txtMenuName.getText().trim()) == true) {
+					JOptionPane.showMessageDialog(null, "같은 메뉴가 존재합니다.");
 					
-			//pane.add(lblMenuName);
-			//pane.add(txtMenuName);
-			//pane.add(lblMenuPrice);
-			//pane.add(txtMenuPrice);
-			//pane.add(btnAddMenu);
-			//pane.add(btnBack);
+				} else {
+					setVisible(false);
+					MenuDAO dao = new MenuDAO();
+					MenuDTO dto = new MenuDTO();
+					dto.setB_id(business.getId());
+					dto.setMenuname(txtMenuName.getText().trim());
+					dto.setMenuprice(Integer.parseInt(txtMenuPrice.getText().trim()));
+					dao.insertMenu(dto);
+					setVisible(true);
+					JOptionPane.showMessageDialog(null, "메뉴를 추가하였습니다", "Success", JOptionPane.PLAIN_MESSAGE);
+				}
+			}
+		});
+				
+		//pane.add(lblMenuName);
+		//pane.add(txtMenuName);
+		//pane.add(lblMenuPrice);
+		//pane.add(txtMenuPrice);
+		//pane.add(btnAddMenu);
+		//pane.add(btnBack);
 			
 			
 		

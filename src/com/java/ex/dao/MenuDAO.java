@@ -299,23 +299,21 @@ public class MenuDAO extends DBConnection {
 	}
 	
 	public boolean SameAddMenu(String b_id,String menuname) {
-		query = "select exists(select * from menu where b_id = '" + b_id + "' and menuname = '" + menuname + "')";
-		
+		query = "select exists(select * from menu where b_id = '" + b_id + "' and menuname = '" + menuname + "') as isExist";
 		
 		try {
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(query);
 			
-			while(rs.next()) {
-			int result = rs.getInt(1);
-			if(result == 1) {
-				return true;
-			} 
-			else if(result == 0){
-				return false;
+			if(rs.next()) {
+				int result = rs.getInt("isExist");
+				if(result == 1) {
+					return true;
+				} else if(result == 0){
+					return false;
 				}
 			}
-		}catch(SQLException ex) {
+		} catch(SQLException ex) {
 			ex.printStackTrace();
 			
 			System.out.println("접속 실ㅇ패");
