@@ -145,6 +145,8 @@ public class Baguni extends JFrame {
 					int clear = JOptionPane.showConfirmDialog(null, "주문을 취소 하시겠습니까?", "주문 취소",
 							JOptionPane.YES_NO_OPTION);
 					if (clear == JOptionPane.YES_OPTION) {
+						System.out.println(member.getId());
+						System.out.println(sbno);
 						dao.BaguniSelectDelete(member.getId(), sbno);
 						lblBaguni.setVisible(false);
 						btnDelete.setVisible(false);
@@ -214,6 +216,7 @@ public class Baguni extends JFrame {
 				payBaguniList = BaguniDao.payBaguni(member.getId());
 				//System.out.println(member.getId());
 				if (pay == JOptionPane.YES_OPTION) {
+					
 					for (int i = 0; i < payBaguniList.size(); i++) {
 						
 						HashMap<String, Object> hashmap = (HashMap<String, Object>) payBaguniList.get(i);
@@ -234,9 +237,7 @@ public class Baguni extends JFrame {
 					Dimension di = pane.getPreferredSize();
 					di.height += 60;
 					pane.setPreferredSize(di);
-					
-					
-					
+								
 					BaguniDAO dao = new BaguniDAO();
 					ArrayList<BaguniDTO> dtos = new ArrayList<BaguniDTO>();
 					
@@ -269,8 +270,9 @@ public class Baguni extends JFrame {
 							orderdao.insertOrder(dto);
 						}													
 						
+						odao.BaguniDelete(member.getId());
 						
-						
+					
 				} else {
 					MenuDAO Dao = new MenuDAO();
 					ArrayList<Map<String, Object>> BaguniList = new ArrayList<Map<String, Object>>();

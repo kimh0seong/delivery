@@ -154,7 +154,8 @@ public class MenuDAO extends DBConnection {
 	}
 	
 	public void BaguniSelectDelete(String m_id, int sb_no) {
-		query = "delete from baguni where m_id =? and sb_no =?";
+		//query = "delete from baguni where m_id = '" + m_id + "' and sb_no = '" + sb_no + "'";
+		query = "delete from baguni where m_id = ? and sb_no = ?";
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, m_id);

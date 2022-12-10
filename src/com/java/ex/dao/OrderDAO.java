@@ -372,8 +372,8 @@ public class OrderDAO extends DBConnection {
 		return OrderList; 
 	}
 	
-	public  ArrayList<Map<String,Object>> recentOrder(String bid) {
-		query = "select o.o_datetime, o.m_id, b.b_name, menuname, menu_count, (menuprice*menu_count) as menutotalprice from `order` o, menu m, business b where b.b_id = m.b_id and o.menu_no = m.menu_no and o.m_id = '" + bid + "' order by o.o_no DESC";
+	public  ArrayList<Map<String,Object>> recentOrder(String mid) {
+		query = "select o.o_datetime, o.m_id, b.b_name, menuname, menu_count, (menuprice*menu_count) as menutotalprice from `order` o, menu m, business b where b.b_id = m.b_id and o.menu_no = m.menu_no and o.m_id = '" + mid + "' order by o.o_no DESC";
 				 
 		ArrayList<Map<String,Object>> OrderList = new ArrayList<Map<String,Object>>();
 		
@@ -393,6 +393,47 @@ public class OrderDAO extends DBConnection {
 				map.put("o_datetime", o_datetime);
 				map.put("m_id", m_id);
 				map.put("b_name", b_name);
+				map.put("menuname", menuname);
+				map.put("menu_count", menu_count);
+				map.put("menutotalprice", menuprice);
+				
+				OrderList.add(map);
+				
+			}
+		} catch(SQLException ex) {
+			ex.printStackTrace();
+			System.out.println("½ÇÆÐ");
+		} finally {
+			try {
+				if (rs != null) rs.close();
+				if (stmt != null) stmt.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return OrderList; 
+	}
+	
+	
+	public  ArrayList<Map<String,Object>> recentBusinessOrder(String bid) {
+		query = "select o.o_datetime, o.m_id, menuname, menu_count, (menuprice*menu_count) as menutotalprice from `order` o, menu m, business b where b.b_id = m.b_id and o.menu_no = m.menu_no and o.b_id = '" + bid + "' order by o.o_no DESC";
+				 
+		ArrayList<Map<String,Object>> OrderList = new ArrayList<Map<String,Object>>();
+		
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(query);
+			
+			while(rs.next()) {	
+				Date o_datetime = rs.getDate("o_datetime");
+				String m_id = rs.getString("m_id");
+				String menuname = rs.getString("menuname");
+				int menu_count = rs.getInt("menu_count");
+				int menuprice = rs.getInt("menutotalprice");
+							
+				Map map = new HashMap<String, Object>();
+				map.put("o_datetime", o_datetime);
+				map.put("m_id", m_id);
 				map.put("menuname", menuname);
 				map.put("menu_count", menu_count);
 				map.put("menutotalprice", menuprice);

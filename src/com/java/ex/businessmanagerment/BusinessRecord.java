@@ -91,7 +91,7 @@ public class BusinessRecord extends JFrame{
 		
 		OrderDAO OrderDao = new OrderDAO();
 		ArrayList<Map<String, Object>> recentOrderList = new ArrayList<Map<String, Object>>();
-		recentOrderList = OrderDao.recentOrder(b_id);
+		recentOrderList = OrderDao. recentBusinessOrder(b_id);
 		
 		for(int i = 0; i < recentOrderList.size(); i++) {
 			HashMap<String, Object> hashmap = (HashMap<String, Object>) recentOrderList.get(i);
