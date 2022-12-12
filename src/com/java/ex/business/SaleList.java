@@ -63,7 +63,7 @@ public class SaleList extends JFrame {
 		setLocationRelativeTo(null); // 화면 중앙 배치
 		setResizable(false);
 	    
-		JLabel titleOrder = new JLabel("오늘 매출");
+		JLabel titleOrder = new JLabel("today 매출");
 		titleOrder.setBounds(120, 10, 500, 50);
 		titleOrder.setFont(font2);
 		add(titleOrder);
